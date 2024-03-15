@@ -22,7 +22,7 @@ O TripFi foi desenvolvido utilizando as seguintes tecnologias:
 
 - Frontend: [Next.js](https://nextjs.org/) ![Next.js Logo](/public/next.svg)
 - Backend: [React](https://reactjs.org/) ![React Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/320px-React-icon.svg.png)
-- Banco de Dados: MySQL ![MySQL Logo](https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/320px-MySQL.svg.png)
+- Banco de Dados: MySQL ![MySQL Logo](https://p1.hiclipart.com/preview/64/828/885/mysql-logo-organization-database-database-management-system-theory-implementation-line-circle-png-clipart.jpg)
 
 ## Contato
 
