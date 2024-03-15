@@ -19,13 +19,13 @@ O TripFi é um aplicativo simples de controle de despesas desenvolvido para ajud
 ## Tecnologias Utilizadas
 
 O TripFi foi desenvolvido utilizando as seguintes tecnologias:
-<div style="display: flex;">
-- <img src="/public/next.svg" alt="Next.js Logo" width="70" style="vertical-align: middle;"> 
-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/320px-React-icon.svg.png" alt="React Logo" width="50" style="vertical-align: middle;">
-- <img src="/public/mysql.png" alt="MySQL Logo" width="70" style="vertical-align: middle;">
+
+<div style="display: flex; horizontak-align: middle">
+<img src="/public/next.svg" alt="Next.js Logo" width="70" style="vertical-align: middle;"> 
+<img src="/public/next.png" alt="React Logo" width="70" style="vertical-align: middle;">
+<img src="/public/mysql.png" alt="MySQL Logo" width="80" style="vertical-align: middle;">
 </div>
 
 ## Contato
 
 Se você tiver alguma dúvida ou sugestão sobre o TripFi, entre em contato conosco pelo email [joaopmfranca@gmail.com].
-
