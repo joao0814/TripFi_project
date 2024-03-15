@@ -20,9 +20,9 @@ O TripFi é um aplicativo simples de controle de despesas desenvolvido para ajud
 
 O TripFi foi desenvolvido utilizando as seguintes tecnologias:
 
-- Frontend: [Next.js](https://nextjs.org/) ![Next.js Logo](/public/next.svg)
-- Backend: [React](https://reactjs.org/) ![React Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/320px-React-icon.svg.png)
-- Banco de Dados: MySQL ![MySQL Logo](https://p1.hiclipart.com/preview/64/828/885/mysql-logo-organization-database-database-management-system-theory-implementation-line-circle-png-clipart.jpg)
+- Frontend: [Next.js](https://nextjs.org/) <img src="/public/next.svg" alt="Next.js Logo" width="50" style="vertical-align: middle;"> 
+- Backend: [React](https://reactjs.org/) <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/320px-React-icon.svg.png" alt="React Logo" width="50" style="vertical-align: middle;">
+- Banco de Dados: MySQL <img src="/public/mysql.png" alt="MySQL Logo" width="50" style="vertical-align: middle;">
 
 ## Contato
 
