@@ -8,7 +8,7 @@ O TripFi é um aplicativo simples de controle de despesas desenvolvido para ajud
 - **Gestão de Orçamento:** Defina orçamentos para diferentes categorias de despesas e acompanhe seu progresso em relação aos limites estabelecidos.
 - **Conversão de Moeda:** O TripFi oferece suporte à conversão de moedas em tempo real, permitindo que você visualize suas despesas em sua moeda local.
 - **Relatórios e Insights:** Analise seus gastos com relatórios detalhados e gráficos intuitivos, ajudando você a identificar padrões de gastos e tomar decisões financeiras informadas.
-- **Sincronização na Nuvem:** Sincronize seus dados em vários dispositivos para acessar suas informações a qualquer momento e de qualquer lugar.
+
 
 ## Como Usar
 
