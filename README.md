@@ -8,7 +8,7 @@ O TripFi é um aplicativo simples de controle de despesas desenvolvido para ajud
 - **Gestão de Orçamento:** Defina orçamentos para diferentes categorias de despesas e acompanhe seu progresso em relação aos limites estabelecidos.
 - **Conversão de Moeda:** O TripFi oferece suporte à conversão de moedas em tempo real, permitindo que você visualize suas despesas em sua moeda local.
 - **Relatórios e Insights:** Analise seus gastos com relatórios detalhados e gráficos intuitivos, ajudando você a identificar padrões de gastos e tomar decisões financeiras informadas.
-- **Sincronização na Nuvem:** Sincronize seus dados em vários dispositivos para acessar suas informações a qualquer momento e de qualquer lugar.
+
 
 ## Como Usar
 
@@ -20,10 +20,10 @@ O TripFi é um aplicativo simples de controle de despesas desenvolvido para ajud
 
 O TripFi foi desenvolvido utilizando as seguintes tecnologias:
 
-<div style="display: flex; horizontak-align: middle">
-<img src="/public/next.png" alt="Next.js Logo" width="70" style="vertical-align: middle;"> 
-<img src="/public/mysql.png" alt="React Logo" width="70" style="vertical-align: middle;">
-<img src="/public/mysql.png" alt="MySQL Logo" width="80" style="vertical-align: middle;">
+<div style="display: flex;">
+  <img src="/public/next.png" alt="Next.js Logo" width="70" style="vertical-align: middle;"> 
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/320px-React-icon.svg.png" alt="React Logo" width="70" style="vertical-align: middle;">
+  <img src="/public/mysql.png" alt="MySQL Logo" width="80" style="vertical-align: middle;">
 </div>
 
 ## Contato
