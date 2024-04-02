@@ -1,7 +1,6 @@
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
-
 import "./globals.css";
 import TripNavbar from "./components/TripNavbar/TripNavbar";
 
@@ -15,7 +14,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <>
-        {children}
+      <TripNavbar />
+      {children}
       <Analytics />
     </>
   );
