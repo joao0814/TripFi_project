@@ -1,10 +1,7 @@
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
-import { PrimeReactProvider } from "primereact/api";
-import Tailwind from "primereact/passthrough/tailwind";
-import "primeflex/primeflex.css";
-import "primeicons/primeicons.css";
+
 import "./globals.css";
 import TripNavbar from "./components/TripNavbar/TripNavbar";
 
@@ -18,10 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <>
-      <PrimeReactProvider value={{ pt: Tailwind }}>
-        <TripNavbar />
         {children}
-      </PrimeReactProvider>
       <Analytics />
     </>
   );
