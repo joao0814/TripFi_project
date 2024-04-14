@@ -1,8 +1,8 @@
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
-import "./globals.css";
-import TripNavbar from "./components/TripNavbar/TripNavbar";
+import "../styles/globals.css";
+import TripNavbar from "./components/TripNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
