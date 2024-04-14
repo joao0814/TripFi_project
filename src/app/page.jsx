@@ -1,4 +1,40 @@
-import { currencyFormatter } from "@/lib/utils";
+"use client";
+import { currencyFormatter } from "../lib/utils";
+
+import TripExpenseCategory from "./components/TripExpenseCategory";
+
+const DUMMY_DATA = [
+  {
+    id: 1,
+    title: "Entertainment",
+    color: "#000",
+    total: 500,
+  },
+  {
+    id: 2,
+    title: "Gass",
+    color: "#009",
+    total: 200,
+  },
+  {
+    id: 3,
+    title: "Fuel",
+    color: "#000",
+    total: 1200,
+  },
+  {
+    id: 4,
+    title: "Movies",
+    color: "#fff",
+    total: 800,
+  },
+  {
+    id: 5,
+    title: "Holiday",
+    color: "#000",
+    total: 2000,
+  },
+];
 
 export default function Home() {
   return (
@@ -11,6 +47,23 @@ export default function Home() {
       <section className="flex items-center gap-2 py-3">
         <button className="btn btn-primary">+ Expenses</button>
         <button className="btn btn-primary-outline">+ Income</button>
+      </section>
+
+      {/* Expenses */}
+      <section className="py-6">
+        <h3 className="text-2xl">My Expenses</h3>
+        <div className="flex flex-col gap-4 mt-6">
+          {DUMMY_DATA.map((expense) => {
+            return (
+              <TripExpenseCategory
+                key={expense.id}
+                color={expense.color}
+                title={expense.title}
+                total={expense.total}
+              />
+            );
+          })}
+        </div>
       </section>
     </main>
   );
