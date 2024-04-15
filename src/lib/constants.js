@@ -2,7 +2,7 @@ export const DUMMY_DATA = [
   {
     id: 1,
     title: "Entertainment",
-    color: "#000",
+    color: "#2eff00",
     total: 500,
   },
   {
@@ -14,7 +14,7 @@ export const DUMMY_DATA = [
   {
     id: 3,
     title: "Fuel",
-    color: "#000",
+    color: "#ff0000",
     total: 1200,
   },
   {
@@ -26,7 +26,7 @@ export const DUMMY_DATA = [
   {
     id: 5,
     title: "Holiday",
-    color: "#000",
+    color: "#ba0bea",
     total: 2000,
   },
 ];
