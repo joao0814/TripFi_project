@@ -1,5 +1,5 @@
-import LayoutBasic from "@/components/LayoutBasic";
+import TripLayoutBasic from "@/components/TripLayoutBasic";
 
 export default function Home() {
-  return <LayoutBasic />;
+  return <TripLayoutBasic />;
 }
