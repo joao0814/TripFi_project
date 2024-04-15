@@ -1,4 +1,4 @@
-export const DUMMY_DATA = [
+export const TRIP_DATA = [
   {
     id: 1,
     title: "Entertainment",
