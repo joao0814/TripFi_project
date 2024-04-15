@@ -1,9 +1,4 @@
-import { Inter } from "next/font/google";
-
 import "../styles/globals.css";
-import TripNavbar from "./components/TripNavbar";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "TRIPFI",
@@ -12,9 +7,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <>
-      <TripNavbar />
-      {children}
-    </>
+    <html lang="en">
+      <body>{children}</body>
+    </html>
   );
 }
