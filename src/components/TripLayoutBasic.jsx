@@ -1,17 +1,19 @@
 "use client";
-
+import React, { useState } from "react";
 import { TRIP_DATA } from "@/lib/constants";
 import { currencyFormatter } from "@/lib/utils";
 import TripNavbar from "./TripNavbar";
 import TripExpenseCategory from "./TripExpenseCategory";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
 import TripChart from "./TripChart";
+import TripModal from "./TripModal";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function LayoutBasic() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   return (
     <>
       <TripNavbar />
@@ -22,9 +24,21 @@ export default function LayoutBasic() {
         </section>
 
         <section className="flex items-center gap-2 py-3">
-          <button className="btn btn-primary">+ Expenses</button>
-          <button className="btn btn-primary-outline">+ Income</button>
+          <button
+            onClick={() => setModalIsOpen(true)}
+            className="btn btn-primary"
+          >
+            + Expenses
+          </button>
+          <button
+            onClick={() => setModalIsOpen(true)}
+            className="btn btn-primary-outline"
+          >
+            + Income
+          </button>
         </section>
+
+        <TripModal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} />
 
         {/* Expenses */}
         <section className="py-6">
