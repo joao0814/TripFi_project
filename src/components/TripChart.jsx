@@ -4,7 +4,7 @@ import { Doughnut } from "react-chartjs-2";
 
 const TripChart = () => {
   const [selectedItems, setSelectedItems] = useState([]);
-  const [chartSize, setChartSize] = useState(window.innerWidth * 0.4);
+  const [chartSize, setChartSize] = useState(0);
 
   const handleLegendItemClick = (label) => {
     if (selectedItems.includes(label)) {
@@ -28,6 +28,8 @@ const TripChart = () => {
       setChartSize(window.innerWidth * 0.4);
     };
 
+    setChartSize(window.innerWidth * 0.4);
+
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -38,22 +40,22 @@ const TripChart = () => {
   return (
     <div className="grid grid-cols-2 w-full">
       <div className="w-ful">
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start pt-10">
           {TRIP_DATA.map((expense) => {
             const percentage = ((expense.total / total) * 100).toFixed(2);
             return (
               <div
                 key={expense.title}
-                className={`flex items-center cursor-pointer ${
+                className={`flex items-center cursor-pointer py-2 ${
                   selectedItems.includes(expense.title) ? "line-through" : ""
                 }`}
                 onClick={() => handleLegendItemClick(expense.title)}
               >
                 <div
-                  className="w-4 h-4 mr-2 bg-transparent border border-white"
+                  className="w-4 h-4 mr-2 bg-transparent border rounded-full border-white"
                   style={{ backgroundColor: expense.color }}
                 ></div>
-                <span className="text-white">
+                <span className="text-white text-lg">
                   {expense.title} ({percentage}%)
                 </span>
               </div>
@@ -72,8 +74,8 @@ const TripChart = () => {
                 label: "Expenses",
                 data: filteredData.map((expense) => expense.total),
                 backgroundColor: filteredData.map((expense) => expense.color),
-                borderColor: "#18181b",
-                borderWidth: 5,
+                borderColor: "#000",
+                borderWidth: 1,
               },
             ],
           }}
