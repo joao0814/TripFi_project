@@ -46,7 +46,7 @@ const TripChart = () => {
             return (
               <div
                 key={expense.title}
-                className={`flex items-center cursor-pointer py-2 ${
+                className={`flex items-center cursor-pointer md:py-2 ${
                   selectedItems.includes(expense.title) ? "line-through" : ""
                 }`}
                 onClick={() => handleLegendItemClick(expense.title)}
