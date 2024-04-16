@@ -58,9 +58,9 @@ export default function LayoutBasic() {
         </section>
 
         <section className="py-6">
-          <h3 className="text-2xl">Stats</h3>
-          <div className="flex justify-between">
-            <div className="w-3/5">
+          <h3 className="text-3xl">Stats</h3>
+          <div className="flex justify-between py-6">
+            <div className="w-full h-full">
               <TripChart />
             </div>
           </div>
