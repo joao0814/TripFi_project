@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
       <body>
         <AuthContextProvider>
           <FinanceContextProvider>
-            <ToastContainer />
+            <ToastContainer limit={4} />
             <Nav />
             {children}
           </FinanceContextProvider>
