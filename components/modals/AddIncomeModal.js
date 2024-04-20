@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, useEffect, useContext } from "react";
 import { currencyFormatter } from "@/lib/utils";
 
