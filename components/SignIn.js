@@ -12,7 +12,7 @@ function SignIn() {
   const { googleLoginHandler } = useContext(authContext);
 
   return (
-    <div className="flex w-full h-full max-h-[85vh] overflow-y-hidden items-center justify-center p-10 md:p-22 lg:p-64">
+    <div className="flex w-full h-screen overflow-y-hidden items-center justify-center p-10 md:p-22 lg:p-64">
       <div className="bg-white px-10 rounded-2xl ">
         <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-10">
           <div className="flex items-center">
