@@ -1,32 +1,32 @@
-'use client';
+"use client";
 
 import { useContext } from "react";
 
 import { authContext } from "@/lib/store/auth-context";
 
 import { ImStatsBars } from "react-icons/im";
+import Image from "next/image";
 
 function Nav() {
   const { user, loading, logout } = useContext(authContext);
 
+  // Se o usuário não estiver logado, não renderize o componente
+  if (!user && !loading) {
+    return null;
+  }
+
   return (
-    <header className="container max-w-2xl px-6 py-6 mx-auto">
-      <div className="flex items-center justify-between">
+    <div className="bg-gray-700 py-3 w-full">
+      <div className="flex items-center justify-between px-10">
         {/* User information */}
         {user && !loading && (
-          <div className="flex items-center gap-2">
-            {/* img */}
-            <div className="h-[40px] w-[40px] rounded-full overflow-hidden">
-              <img
-                className="object-cover w-full h-full"
-                src={user.photoURL}
-                alt={user.displayName}
-                referrerPolicy="no-referrer"
-              />
-            </div>
-
-            {/* name */}
-            <small>Hi, {user.displayName}!</small>
+          <div className="flex flex-col items-center gap-2 ">
+            <Image
+              src="/logo.svg"
+              width={80}
+              height={40}
+              alt={user.displayName}
+            />
           </div>
         )}
 
@@ -43,10 +43,19 @@ function Nav() {
                 Sign out
               </button>
             </div>
+            {/* img */}
+            <div className="h-[40px] w-[40px] rounded-full overflow-hidden">
+              <img
+                className="object-cover w-full h-full"
+                src={user.photoURL}
+                alt={user.displayName}
+                referrerPolicy="no-referrer"
+              />
+            </div>
           </nav>
         )}
       </div>
-    </header>
+    </div>
   );
 }
 

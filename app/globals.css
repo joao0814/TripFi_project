@@ -11,6 +11,14 @@
     @apply relative text-white bg-slate-900;
   }
 
+  .navbar-logged-out {
+  display: none; /* esconde a barra de navegação */
+}
+
+.navbar-logged-in {
+  display: block; /* mostra a barra de navegação */
+}
+
   button {
     @apply transition-all duration-100 hover:scale-110;
   }
