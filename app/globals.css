@@ -14,21 +14,23 @@
   .desktop {
     display: block;
   }
-  
+
   /* Esconde os elementos com a classe .desktop quando a largura da janela for menor que 600px */
   @media screen and (max-width: 600px) {
     .desktop {
       display: none;
     }
   }
-  
-  .navbar-logged-out {
-  display: none; /* esconde a barra de navegação */
-}
 
-.navbar-logged-in {
-  display: block; /* mostra a barra de navegação */
-}
+  .navbar-logged-out {
+    display: none;
+    /* esconde a barra de navegação */
+  }
+
+  .navbar-logged-in {
+    display: block;
+    /* mostra a barra de navegação */
+  }
 
   button {
     @apply transition-all duration-100 hover:scale-110;
@@ -58,5 +60,9 @@
 
   .input-group {
     @apply flex flex-col gap-4;
+  }
+
+  .steps {
+    @apply text-lime-400 border-lime-400;
   }
 }

@@ -68,8 +68,11 @@ function AddExpensesModal({ show, onClose }) {
 
   return (
     <Modal show={show} onClose={onClose}>
+      <div className="text-center pb-5">
+        <h1 className="text-3xl">Despesas</h1>
+      </div>
       <div className="flex flex-col gap-4">
-        <label>Insira um valor..</label>
+        <label>Insira um valor</label>
         <input
           type="number"
           min={0.01}
