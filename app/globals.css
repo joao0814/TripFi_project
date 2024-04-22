@@ -11,6 +11,17 @@
     @apply relative text-white bg-slate-900;
   }
 
+  .desktop {
+    display: block;
+  }
+  
+  /* Esconde os elementos com a classe .desktop quando a largura da janela for menor que 600px */
+  @media screen and (max-width: 600px) {
+    .desktop {
+      display: none;
+    }
+  }
+  
   .navbar-logged-out {
   display: none; /* esconde a barra de navegação */
 }

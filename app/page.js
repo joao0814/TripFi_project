@@ -57,8 +57,8 @@ export default function Home() {
       />
 
       <main className="container max-w-2xl px-6 mx-auto">
-        <section className="py-3">
-          <small className="text-gray-400 text-md">My Balance</small>
+        <section className="pt-8">
+          <h1 className="text-3xl pb-2">Minha renda</h1>
           <h2 className="text-4xl font-bold">{currencyFormatter(balance)}</h2>
         </section>
 
@@ -69,7 +69,7 @@ export default function Home() {
             }}
             className="btn btn-primary"
           >
-            + Expenses
+            + Despesas
           </button>
           <button
             onClick={() => {
@@ -77,13 +77,13 @@ export default function Home() {
             }}
             className="btn btn-primary-outline"
           >
-            + Income
+            + Renda
           </button>
         </section>
 
         {/* Expenses */}
         <section className="py-6">
-          <h3 className="text-2xl">My Expenses</h3>
+          <h3 className="text-2xl">Minhas despesas por categoria</h3>
           <div className="flex flex-col gap-4 mt-6">
             {expenses.map((expense) => {
               return <ExpenseCategoryItem key={expense.id} expense={expense} />;
@@ -94,7 +94,7 @@ export default function Home() {
         {/* Chart Section */}
         <section className="py-6">
           <a id="stats" />
-          <h3 className="text-2xl">Stats</h3>
+          <h3 className="text-2xl">Status</h3>
           <div className="w-1/2 mx-auto">
             <Doughnut
               data={{
@@ -116,4 +116,3 @@ export default function Home() {
     </>
   );
 }
-

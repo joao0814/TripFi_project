@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useContext } from "react";
 import { financeContext } from "@/lib/store/finance-context";
@@ -17,7 +17,7 @@ function ViewExpenseModal({ show, onClose, expense }) {
   const deleteExpenseHandler = async () => {
     try {
       await deleteExpenseCategory(expense.id);
-      toast.success("Expense category deleted successfully!");
+      toast.success("Categoria de viagem apagada com sucesso!");
     } catch (error) {
       console.log(error.message);
       toast.error(error.message);
@@ -36,7 +36,7 @@ function ViewExpenseModal({ show, onClose, expense }) {
       };
 
       await deleteExpenseItem(updatedExpense, expense.id);
-      toast.success("Expense item removed successfully!");
+      toast.success("Despesa removida com sucesso!");
     } catch (error) {
       console.log(error.message);
       toast.error(error.message);
@@ -48,12 +48,12 @@ function ViewExpenseModal({ show, onClose, expense }) {
       <div className="flex items-center justify-between">
         <h2 className="text-4xl">{expense.title}</h2>
         <button onClick={deleteExpenseHandler} className="btn btn-danger">
-          Delete
+          Deletar
         </button>
       </div>
 
       <div>
-        <h3 className="my-4 text-2xl">Expense History</h3>
+        <h3 className="my-4 text-2xl">Histórico de gastos</h3>
         {expense.items.map((item) => {
           return (
             <div key={item.id} className="flex items-center justify-between">

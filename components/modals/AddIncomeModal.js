@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useRef, useEffect, useContext } from "react";
 import { currencyFormatter } from "@/lib/utils";
@@ -36,7 +36,7 @@ function AddIncomeModal({ show, onClose }) {
       await addIncomeItem(newIncome);
       descriptionRef.current.value = "";
       amountRef.current.value = "";
-      toast.success("Income added successfully!");
+      toast.success("Valor adicionado com sucesso!");
     } catch (error) {
       console.log(error.message);
       toast.error(error.message);
@@ -46,7 +46,7 @@ function AddIncomeModal({ show, onClose }) {
   const deleteIncomeEntryHandler = async (incomeId) => {
     try {
       await removeIncomeItem(incomeId);
-      toast.success("Income deleted successfully.");
+      toast.success("Valor deletado com sucesso!.");
     } catch (error) {
       console.log(error.message);
       toast.error(error.message);
@@ -55,38 +55,42 @@ function AddIncomeModal({ show, onClose }) {
 
   return (
     <Modal show={show} onClose={onClose}>
+      <div className="text-center pb-5">
+        <h1 className="text-3xl">Entradas</h1>
+      </div>
       <form onSubmit={addIncomeHandler} className="flex flex-col gap-4">
         <div className="input-group">
-          <label htmlFor="amount">Income Amount</label>
+          <label htmlFor="amount">Valor</label>
           <input
             type="number"
             name="amount"
             ref={amountRef}
             min={0.01}
             step={0.01}
-            placeholder="Enter income amount"
+            placeholder="Coloque o valor"
             required
           />
         </div>
 
         <div className="input-group">
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description">Descrição</label>
           <input
             name="description"
             ref={descriptionRef}
             type="text"
-            placeholder="Enter income description"
+            placeholder="Coloque a descrição do valor"
             required
           />
         </div>
-
-        <button type="submit" className="btn btn-primary">
-          Add entry
-        </button>
+        <div className="flex justify-center mt-4">
+          <button type="submit" className="btn btn-primary">
+            Adicionar entrada
+          </button>
+        </div>
       </form>
 
       <div className="flex flex-col gap-4 mt-6">
-        <h3 className="text-2xl font-bold">Income History</h3>
+        <h3 className="text-2xl font-bold">Histórico de entradas</h3>
 
         {income.map((i) => {
           return (

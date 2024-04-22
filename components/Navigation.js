@@ -33,20 +33,19 @@ function Nav() {
         {/* Right side of our navigation */}
         {user && !loading && (
           <nav className="flex items-center gap-4">
-            <div>
+            <div className="desktop">
               <a href="#stats">
                 <ImStatsBars className="text-2xl" />
               </a>
             </div>
             <div>
               <button onClick={logout} className="btn btn-danger">
-                Sign out
+                Sair
               </button>
             </div>
-            {/* img */}
-            <div className="h-[40px] w-[40px] rounded-full overflow-hidden">
+            <div className="desktop">
               <img
-                className="object-cover w-full h-full"
+                className="object-cover w-[40px] h-[40px] rounded-full"
                 src={user.photoURL}
                 alt={user.displayName}
                 referrerPolicy="no-referrer"
