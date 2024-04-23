@@ -19,10 +19,10 @@ export default function RootLayout({ children }) {
       */}
       <head />
       <body>
-        <AuthContextProvider>
-          <FinanceContextProvider>
-            <ToastContainer limit={4} />
-            <Nav />
+        <AuthContextProvider> {/* Verifica se está logado*/}
+          <FinanceContextProvider> {/* Traz as informações do banco para os componentes*/}
+            <ToastContainer limit={4} /> {/* Aviso */}
+            <Nav /> {/* Navbar*/}
             {children}
           </FinanceContextProvider>
         </AuthContextProvider>

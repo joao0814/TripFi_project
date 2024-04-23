@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useContext } from "react";
+import { useRef, useContext } from "react";
 import { currencyFormatter } from "@/lib/utils";
 
 import { financeContext } from "@/lib/store/finance-context";
@@ -14,14 +14,17 @@ import Modal from "@/components/Modal";
 import { toast } from "react-toastify";
 
 function AddIncomeModal({ show, onClose }) {
+  // Referência para o input do valor da renda
   const amountRef = useRef();
+  // Referência para o input da descrição da renda
   const descriptionRef = useRef();
-  const { income, addIncomeItem, removeIncomeItem } =
-    useContext(financeContext);
 
+  // Contexto de finanças para acessar a função de adicionar e remover entradas de renda
+  const { income, addIncomeItem, removeIncomeItem } = useContext(financeContext);
+  // Contexto de autenticação para obter o usuário logado
   const { user } = useContext(authContext);
 
-  // Handler Functions
+  // Função para adicionar uma nova entrada de renda
   const addIncomeHandler = async (e) => {
     e.preventDefault();
 
@@ -33,23 +36,24 @@ function AddIncomeModal({ show, onClose }) {
     };
 
     try {
-      await addIncomeItem(newIncome);
-      descriptionRef.current.value = "";
-      amountRef.current.value = "";
-      toast.success("Valor adicionado com sucesso!");
+      await addIncomeItem(newIncome); // Chama a função para adicionar a entrada de renda
+      descriptionRef.current.value = ""; // Limpa o campo de descrição após adicionar a renda
+      amountRef.current.value = ""; // Limpa o campo de valor após adicionar a renda
+      toast.success("Valor adicionado com sucesso!"); // Exibe um toast de sucesso
     } catch (error) {
       console.log(error.message);
-      toast.error(error.message);
+      toast.error(error.message); // Exibe um toast de erro caso ocorra algum problema
     }
   };
 
+  // Função para excluir uma entrada de renda
   const deleteIncomeEntryHandler = async (incomeId) => {
     try {
-      await removeIncomeItem(incomeId);
-      toast.success("Valor deletado com sucesso!.");
+      await removeIncomeItem(incomeId); // Chama a função para remover a entrada de renda
+      toast.success("Valor deletado com sucesso!."); // Exibe um toast de sucesso após a exclusão
     } catch (error) {
       console.log(error.message);
-      toast.error(error.message);
+      toast.error(error.message); // Exibe um toast de erro caso ocorra algum problema
     }
   };
 
@@ -89,6 +93,7 @@ function AddIncomeModal({ show, onClose }) {
         </div>
       </form>
 
+      {/* Histórico de entradas */}
       <div className="flex flex-col gap-4 mt-6">
         <h3 className="text-2xl font-bold">Histórico de entradas</h3>
 
@@ -97,16 +102,19 @@ function AddIncomeModal({ show, onClose }) {
             <div className="flex justify-between item-center" key={i.id}>
               <div>
                 <p className="font-semibold">{i.description}</p>
-                <small className="text-xs">{i.createdAt.toISOString()}</small>
+                <small className="text-xs">
+                  {i.createdAt instanceof Date ? i.createdAt.toISOString() : ''}
+                </small>
               </div>
               <p className="flex items-center gap-2">
                 {currencyFormatter(i.amount)}
+                {/* Botão para excluir a entrada de renda */}
                 <button
                   onClick={() => {
-                    deleteIncomeEntryHandler(i.id);
+                    deleteIncomeEntryHandler(i.id); // Chama a função para excluir a entrada de renda
                   }}
                 >
-                  <FaRegTrashAlt />
+                  <FaRegTrashAlt /> {/* Ícone de lixeira para excluir */}
                 </button>
               </p>
             </div>
