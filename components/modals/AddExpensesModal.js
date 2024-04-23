@@ -71,23 +71,11 @@ function AddExpensesModal({ show, onClose }) {
       <div className="text-center pb-5">
         <h1 className="text-3xl">Despesas</h1>
       </div>
-      <div className="flex flex-col gap-4">
-        <label>Insira um valor</label>
-        <input
-          type="number"
-          min={0.01}
-          step={0.01}
-          placeholder="Valor do gasto"
-          value={expenseAmount}
-          onChange={(e) => {
-            setExpenseAmount(e.target.value);
-          }}
-        />
-      </div>
+
 
       {/* Expense Categories */}
       {expenseAmount > 0 && (
-        <div className="flex flex-col gap-4 mt-6">
+        <div className="flex flex-col gap-4 mt-6 pb-4">
           <div className="flex items-center justify-between">
             <h3 className="text-2xl capitalize">Selecione a categoria</h3>
             <button
@@ -154,9 +142,21 @@ function AddExpensesModal({ show, onClose }) {
           })}
         </div>
       )}
-
+      <div className="flex flex-col gap-4">
+        <label>Insira um valor</label>
+        <input
+          type="number"
+          min={0.01}
+          step={0.01}
+          placeholder="Valor do gasto"
+          value={expenseAmount}
+          onChange={(e) => {
+            setExpenseAmount(e.target.value);
+          }}
+        />
+      </div>
       {expenseAmount > 0 && selectedCategory && (
-        <div className="mt-6">
+        <div className="flex justify-center mt-6">
           <button className="btn btn-primary" onClick={addExpenseItemHandler}>
             Adicione o gasto
           </button>
