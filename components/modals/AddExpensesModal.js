@@ -1,24 +1,26 @@
 "use client";
 
-import { useState, useContext, useRef } from "react";
-import { financeContext } from "@/lib/store/finance-context";
+import { useState, useContext, useRef } from "react"; // Hooks do React para estados, contexto e referências
+import { financeContext } from "@/lib/store/finance-context"; // Contexto financeiro para acessar despesas e funções relacionadas
+import { v4 as uuidv4 } from "uuid"; // Pacote para gerar IDs únicos
+import Modal from "@/components/Modal"; // Componente de modal para adicionar despesas
+import { toast } from "react-toastify"; // Pacote para exibir mensagens de notificação
 
-import { v4 as uuidv4 } from "uuid";
-
-import Modal from "@/components/Modal";
-
-import { toast } from "react-toastify";
-
+// Componente AddExpensesModal para adicionar despesas
 function AddExpensesModal({ show, onClose }) {
-  const [expenseAmount, setExpenseAmount] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [showAddExpense, setShowAddExpense] = useState(false);
+  // Estados locais para o valor da despesa, categoria selecionada e exibição do modal de adicionar despesa
+  const [expenseAmount, setExpenseAmount] = useState(""); // Estado para o valor da despesa
+  const [selectedCategory, setSelectedCategory] = useState(null); // Estado para a categoria selecionada
+  const [showAddExpense, setShowAddExpense] = useState(false); // Estado para exibir o modal de adicionar despesa
 
+  // Contexto financeiro para acessar despesas, adicionar item de despesa e adicionar categoria
   const { expenses, addExpenseItem, addCategory } = useContext(financeContext);
 
-  const titleRef = useRef();
-  const colorRef = useRef();
+  // Referências para os campos de título e cor da categoria
+  const titleRef = useRef(); // Referência para o campo de título da categoria
+  const colorRef = useRef(); // Referência para o campo de cor da categoria
 
+  // Função para adicionar um item de despesa
   const addExpenseItemHandler = async () => {
     const expense = expenses.find((e) => {
       return e.id === selectedCategory;
@@ -33,47 +35,46 @@ function AddExpensesModal({ show, onClose }) {
         {
           amount: +expenseAmount,
           createdAt: new Date(),
-          id: uuidv4(),
+          id: uuidv4(), // Gerar um ID único para o item de despesa
         },
       ],
     };
 
     try {
-      await addExpenseItem(selectedCategory, newExpense);
-
-      console.log(newExpense);
-      setExpenseAmount("");
-      setSelectedCategory(null);
-      onClose();
-      toast.success("Gastos adicionado com sucesso!");
+      await addExpenseItem(selectedCategory, newExpense); // Adicionar o item de despesa ao contexto
+      setExpenseAmount(""); // Limpar o valor da despesa após adicionar
+      setSelectedCategory(null); // Limpar a categoria selecionada após adicionar
+      onClose(); // Fechar o modal de adicionar despesa
+      toast.success("Gastos adicionado com sucesso!"); // Exibir uma mensagem de sucesso
     } catch (error) {
-      console.log(error.message);
-      toast.error(error.message);
+      console.log(error.message); // Registrar qualquer erro no console
+      toast.error(error.message); // Exibir uma mensagem de erro
     }
   };
 
+  // Função para adicionar uma nova categoria
   const addCategoryHandler = async () => {
-    const title = titleRef.current.value;
-    const color = colorRef.current.value;
+    const title = titleRef.current.value; // Obter o título da nova categoria do campo de referência
+    const color = colorRef.current.value; // Obter a cor da nova categoria do campo de referência
 
     try {
-      await addCategory({ title, color, total: 0 });
-      setShowAddExpense(false);
-      toast.success("Categoria criada com sucesso!");
+      await addCategory({ title, color, total: 0 }); // Adicionar a nova categoria ao contexto
+      setShowAddExpense(false); // Ocultar o formulário de adicionar nova categoria após adicionar
+      toast.success("Categoria criada com sucesso!"); // Exibir uma mensagem de sucesso
     } catch (error) {
-      console.log(error.message);
-      toast.error(error.message);
+      console.log(error.message); // Registrar qualquer erro no console
+      toast.error(error.message); // Exibir uma mensagem de erro
     }
   };
 
   return (
+    // Modal de adicionar despesa
     <Modal show={show} onClose={onClose}>
       <div className="text-center pb-5">
         <h1 className="text-3xl">Despesas</h1>
       </div>
 
-
-      {/* Expense Categories */}
+      {/* Lista de categorias de despesas */}
       {expenseAmount > 0 && (
         <div className="flex flex-col gap-4 mt-6 pb-4">
           <div className="flex items-center justify-between">
@@ -88,14 +89,14 @@ function AddExpensesModal({ show, onClose }) {
             </button>
           </div>
 
+          {/* Formulário para adicionar nova categoria */}
           {showAddExpense && (
             <div className="flex items-center justify-between">
-              <input type="text" placeholder="Coloque o nome" ref={titleRef} />
-
+              <input type="text" placeholder="Coloque o nome" ref={titleRef} /> {/* Campo para inserir o título da nova categoria */}
               <label>Escolha a cor</label>
-              <input type="color" className="w-24 h-10" ref={colorRef} />
+              <input type="color" className="w-24 h-10" ref={colorRef} /> {/* Campo para escolher a cor da nova categoria */}
               <button
-                onClick={addCategoryHandler}
+                onClick={addCategoryHandler} // Ao clicar, chama a função para adicionar nova categoria
                 className="btn btn-primary-outline"
               >
                 Criar
@@ -111,6 +112,7 @@ function AddExpensesModal({ show, onClose }) {
             </div>
           )}
 
+          {/* Lista de categorias existentes */}
           {expenses.map((expense) => {
             return (
               <button
@@ -127,14 +129,14 @@ function AddExpensesModal({ show, onClose }) {
                   className="flex items-center justify-between px-4 py-4 bg-slate-700 rounded-3xl"
                 >
                   <div className="flex items-center gap-2">
-                    {/* Colored circle */}
+                    {/* Círculo colorido para representar a categoria */}
                     <div
                       className="w-[25px] h-[25px] rounded-full"
                       style={{
                         backgroundColor: expense.color,
                       }}
                     />
-                    <h4 className="capitalize">{expense.title}</h4>
+                    <h4 className="capitalize">{expense.title}</h4> {/* Título da categoria */}
                   </div>
                 </div>
               </button>
@@ -142,6 +144,8 @@ function AddExpensesModal({ show, onClose }) {
           })}
         </div>
       )}
+
+      {/* Campo para inserção do valor da despesa */}
       <div className="flex flex-col gap-4">
         <label>Insira um valor</label>
         <input
@@ -155,6 +159,8 @@ function AddExpensesModal({ show, onClose }) {
           }}
         />
       </div>
+
+      {/* Botão para adicionar a despesa */}
       {expenseAmount > 0 && selectedCategory && (
         <div className="flex justify-center mt-6">
           <button className="btn btn-primary" onClick={addExpenseItemHandler}>
