@@ -9,7 +9,7 @@ function Modal({ show, onClose, children }) {
       className="absolute top-0 left-0 w-full h-full z-10 transition-all duration-500" // Estilos CSS para posicionamento e transição suave
     >
       {/* Conteúdo do modal */}
-      <div className="container mx-auto max-w-2xl h-[80vh] rounded-3xl bg-slate-800 py-6 px-4"> {/* Container do modal com estilos personalizados */}
+      <div className="container mx-auto max-w-2xl min-h-[80vh] rounded-3xl bg-slate-800 py-6 px-4 flex flex-col overflow-y-auto"> {/* Container do modal com estilos personalizados */}
         {/* Botão para fechar o modal */}
         <button
           onClick={() => {
