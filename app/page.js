@@ -110,9 +110,11 @@ export default function Home() {
 
             {/* Segunda coluna */}
             <div className="px-5">
-              <div className="overflow-y-auto size-11/12 mx-auto my-auto max-h-[500px]">
-                <section className="py-6">
-                  <h3 className="text-2xl">Minhas despesas por categoria</h3>
+              <h2 className="text-4xl font-semibold pb-4">
+                Minhas despesas por categoria:
+              </h2>
+              <div className="mt-8 overflow-y-auto size-11/12 mx-auto my-auto max-h-[500px]">
+                <section className="px-5 pb-6">
                   <div className="flex flex-col gap-4 mt-6">
                     {expenses.map((expense) => {
                       return (
