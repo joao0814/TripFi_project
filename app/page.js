@@ -31,19 +31,24 @@ export default function Home() {
   const [showAddIncomeModal, setShowAddIncomeModal] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [balance, setBalance] = useState(0);
+  const [totalExpenses, setTotalExpenses] = useState(0);
 
   // Obtém dados de despesas e receitas do contexto de finanças e o usuário do contexto de autenticação
   const { expenses, income } = useContext(financeContext);
   const { user } = useContext(authContext);
 
+  // Calcula o valor total das despesas
+  useEffect(() => {
+    const total = expenses.reduce((acc, expense) => acc + expense.total, 0);
+    setTotalExpenses(total);
+  }, [expenses]);
+
   // Atualiza o saldo com base nas despesas e receitas sempre que eles mudam
   useEffect(() => {
     const newBalance =
-      income.reduce((total, i) => total + i.amount, 0) -
-      expenses.reduce((total, e) => total + e.total, 0);
-
+      income.reduce((total, i) => total + i.amount, 0) - totalExpenses;
     setBalance(newBalance);
-  }, [expenses, income]);
+  }, [income, totalExpenses]);
 
   // Renderiza o componente de login se o usuário não estiver autenticado
   if (!user) {
@@ -70,14 +75,14 @@ export default function Home() {
             {/* Coluna 1 */}
             <div className="lg:w-1/2">
               <div className="text-center">
-                <h1 className="text-4xl text-left font-bold">
+                <h1 className="text-4xl font-bold">
                   Registre suas despesas de maneira fácil e rápida!
                 </h1>
               </div>
 
               {/* Passos para o usuário */}
               <section className="pt-8">
-                <h1 className="text-3xl pb-2">Minha renda</h1>
+                <h1 className="text-3xl pb-2">Meu saldo:</h1>
                 <h2 className="text-4xl font-bold">
                   {currencyFormatter(balance)}
                 </h2>
@@ -118,7 +123,7 @@ export default function Home() {
 
           {/* Gráfico de despesas */}
           <div className="text-center pt-8">
-            <h3 className="text-2xl">Status</h3>
+            <h3 className="text-3xl font-semibold">Despesas por categoria</h3>
             <div className="mx-auto" style={{ maxWidth: "600px" }}>
               <Doughnut
                 data={{
@@ -136,10 +141,33 @@ export default function Home() {
                 options={{
                   responsive: true,
                   maintainAspectRatio: false,
+                  plugins: {
+                    legend: {
+                      display: true,
+                      position: "top",
+                      labels: {
+                        padding: 20,
+                        usePointStyle: false,
+                        font: {
+                          size: 16,
+                        },
+                      },
+                    },
+                  },
                 }}
-                style={{ width: "100%", height: "auto" }}
+                style={{ width: "100%", height: "400px" }}
               />
             </div>
+          </div>
+
+          {/* Total de despesas */}
+          <div className="text-center pt-4">
+            <p className="text-xl ">
+              Total de despesas:
+              <p className="text-2xl font-semibold">
+                {currencyFormatter(totalExpenses)}
+              </p>
+            </p>
           </div>
         </div>
       </main>

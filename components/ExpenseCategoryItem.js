@@ -33,7 +33,7 @@ function ExpenseCategoryItem({ expense }) {
               style={{ backgroundColor: expense.color }}
             />
             {/* Título da categoria */}
-            <h4 className="capitalize">{expense.title}</h4>
+            <h4 className="capitalize text-left">{expense.title}</h4>
           </div>
           {/* Valor total da categoria de despesa */}
           <p>{currencyFormatter(expense.total)}</p>
