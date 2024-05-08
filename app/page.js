@@ -75,7 +75,7 @@ export default function Home() {
             {/* Coluna 1 */}
             <div className="lg:w-1/2">
               <div className="text-center">
-                <h1 className="text-4xl font-bold">
+                <h1 className="text-4xl text-left font-bold">
                   Registre suas despesas de maneira fácil e rápida!
                 </h1>
               </div>
@@ -122,7 +122,7 @@ export default function Home() {
           </div>
 
           {/* Gráfico de despesas */}
-          <div className="text-center pt-8">
+          <div className="text-center pt-8" id="stats">
             <h3 className="text-3xl font-semibold">Despesas por categoria</h3>
             <div className="mx-auto" style={{ maxWidth: "600px" }}>
               <Doughnut
@@ -134,7 +134,7 @@ export default function Home() {
                       data: expenses.map((expense) => expense.total),
                       backgroundColor: expenses.map((expense) => expense.color),
                       borderColor: "#18181b",
-                      borderWidth: 5,
+                      borderWidth: 0,
                     },
                   ],
                 }}
