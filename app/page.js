@@ -19,9 +19,8 @@ import AddExpensesModal from "@/components/modals/AddExpensesModal";
 import SignIn from "@/components/SignIn";
 
 // Importa componentes do Chart.js e do react-chartjs-2
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import Steps from "@/components/Steps";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 // Registra os elementos do Chart.js necessários
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -40,12 +39,8 @@ export default function Home() {
   // Atualiza o saldo com base nas despesas e receitas sempre que eles mudam
   useEffect(() => {
     const newBalance =
-      income.reduce((total, i) => {
-        return total + i.amount;
-      }, 0) -
-      expenses.reduce((total, e) => {
-        return total + e.total;
-      }, 0);
+      income.reduce((total, i) => total + i.amount, 0) -
+      expenses.reduce((total, e) => total + e.total, 0);
 
     setBalance(newBalance);
   }, [expenses, income]);
@@ -69,18 +64,18 @@ export default function Home() {
       />
 
       {/* Conteúdo principal da página */}
-      <main className="container max-w-4xl px-6 mx-auto">
+      <main className="container max-w-6xl px-6 mx-auto">
         <div className="pt-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Primeira coluna */}
-            <div>
+          <div className="lg:flex lg:justify-between lg:items-start">
+            {/* Coluna 1 */}
+            <div className="lg:w-1/2">
               <div className="text-center">
-                <h1 className="text-4xl font-bold">
+                <h1 className="text-4xl text-left font-bold">
                   Registre suas despesas de maneira fácil e rápida!
                 </h1>
               </div>
-              <Steps />
 
+              {/* Passos para o usuário */}
               <section className="pt-8">
                 <h1 className="text-3xl pb-2">Minha renda</h1>
                 <h2 className="text-4xl font-bold">
@@ -88,19 +83,16 @@ export default function Home() {
                 </h2>
               </section>
 
+              {/* Botões para adicionar despesas e receitas */}
               <section className="flex items-center gap-2 py-3">
                 <button
-                  onClick={() => {
-                    setShowAddExpenseModal(true);
-                  }}
+                  onClick={() => setShowAddExpenseModal(true)}
                   className="btn btn-primary"
                 >
                   + Despesas
                 </button>
                 <button
-                  onClick={() => {
-                    setShowAddIncomeModal(true);
-                  }}
+                  onClick={() => setShowAddIncomeModal(true)}
                   className="btn btn-primary-outline"
                 >
                   + Renda
@@ -108,49 +100,47 @@ export default function Home() {
               </section>
             </div>
 
-            {/* Segunda coluna */}
-            <div className="px-5">
-              <h2 className="text-4xl font-semibold pb-4">
-                Minhas despesas por categoria:
-              </h2>
-              <div className="mt-8 overflow-y-auto size-11/12 mx-auto my-auto max-h-[500px]">
-                <section className="px-5 pb-6">
-                  <div className="flex flex-col gap-4 mt-6">
-                    {expenses.map((expense) => {
-                      return (
-                        <ExpenseCategoryItem
-                          key={expense.id}
-                          expense={expense}
-                        />
-                      );
-                    })}
-                  </div>
-                </section>
+            {/* Coluna 2 */}
+            <div className="lg:w-1/2">
+              {/* Exibição de despesas por categoria */}
+              <div className="px-5">
+                <h2 className="text-4xl font-semibold pb-4">
+                  Minhas despesas por categoria:
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                  {expenses.map((expense, index) => (
+                    <ExpenseCategoryItem key={index} expense={expense} />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Seção para o gráfico centralizado */}
-          <section className="py-6 lg:col-span-2">
-            <a id="stats" />
-            <h3 className="text-2xl text-center">Status</h3>
-            <div className="w-full lg:w-1/2 mx-auto">
+          {/* Gráfico de despesas */}
+          <div className="text-center pt-8">
+            <h3 className="text-2xl">Status</h3>
+            <div className="mx-auto" style={{ maxWidth: "600px" }}>
               <Doughnut
                 data={{
                   labels: expenses.map((expense) => expense.title),
                   datasets: [
                     {
-                      label: "Expenses",
+                      label: "Despesas",
                       data: expenses.map((expense) => expense.total),
                       backgroundColor: expenses.map((expense) => expense.color),
-                      borderColor: ["#18181b"],
+                      borderColor: "#18181b",
                       borderWidth: 5,
                     },
                   ],
                 }}
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                }}
+                style={{ width: "100%", height: "auto" }}
               />
             </div>
-          </section>
+          </div>
         </div>
       </main>
     </>
