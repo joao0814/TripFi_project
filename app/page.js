@@ -69,7 +69,7 @@ export default function Home() {
       />
 
       {/* Conteúdo principal da página */}
-      <main className="container max-w-6xl px-6 mx-auto">
+      <main className="container max-w-7xl px-6 mx-auto">
         <div className="pt-8">
           <div className="lg:flex lg:justify-between lg:items-start">
             {/* Coluna 1 */}
@@ -152,6 +152,15 @@ export default function Home() {
                           size: 16,
                         },
                       },
+                    },
+                  },
+                  animations: {
+                    tension: {
+                      duration: 1000,
+                      easing: "linear",
+                      from: 1,
+                      to: 0,
+                      loop: true,
                     },
                   },
                 }}
