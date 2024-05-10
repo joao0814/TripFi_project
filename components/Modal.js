@@ -5,11 +5,13 @@ function Modal({ show, onClose, children }) {
     <div
       style={{
         transform: show ? "translateX(0%)" : "translateX(-200%)", // Define a posição do modal com base na propriedade show
+        overflow: show ? "auto" : "hidden", // Controla a rolagem da página enquanto o modal está aberto
       }}
-      className="absolute top-0 left-0 w-full h-full z-10 transition-all duration-500" // Estilos CSS para posicionamento e transição suave
+      className="fixed top-0 left-0 flex flex-col justify-center items-center w-full h-screen z-50 transition-opacity duration-1000 backdrop-blur-sm bg-slate/50" // Estilos CSS para posicionamento e transição suave
     >
       {/* Conteúdo do modal */}
-      <div className="container mx-auto max-w-2xl min-h-[80vh] rounded-3xl bg-slate-800 py-6 px-4 flex flex-col overflow-y-auto"> {/* Container do modal com estilos personalizados */}
+      <div className="container mx-auto max-w-2xl min-h-[80vh] rounded-3xl bg-slate-800 py-6 px-4 flex flex-col overflow-y-auto">
+        {/* Container do modal com estilos personalizados */}
         {/* Botão para fechar o modal */}
         <button
           onClick={() => {
@@ -19,7 +21,8 @@ function Modal({ show, onClose, children }) {
         >
           X {/* Ícone ou texto de fechamento do modal */}
         </button>
-        {children} {/* Renderiza o conteúdo do modal passado como children */}
+        {/* Adicionando a propriedade overflow-hidden para impedir a rolagem do conteúdo abaixo do modal */}
+        <div className={show ? "overflow-hidden" : ""}>{children}</div>
       </div>
     </div>
   );

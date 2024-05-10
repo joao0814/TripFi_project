@@ -149,7 +149,7 @@ export default function Home() {
                         padding: 20,
                         usePointStyle: false,
                         font: {
-                          size: 16,
+                          size: 12,
                         },
                       },
                     },
@@ -164,7 +164,7 @@ export default function Home() {
                     },
                   },
                 }}
-                style={{ width: "100%", height: "400px" }}
+                style={{ width: "100%", height: "auto" }}
               />
             </div>
           </div>

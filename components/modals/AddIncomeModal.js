@@ -20,7 +20,8 @@ function AddIncomeModal({ show, onClose }) {
   const descriptionRef = useRef();
 
   // Contexto de finanças para acessar a função de adicionar e remover entradas de renda
-  const { income, addIncomeItem, removeIncomeItem } = useContext(financeContext);
+  const { income, addIncomeItem, removeIncomeItem } =
+    useContext(financeContext);
   // Contexto de autenticação para obter o usuário logado
   const { user } = useContext(authContext);
 
@@ -96,30 +97,30 @@ function AddIncomeModal({ show, onClose }) {
       {/* Histórico de entradas */}
       <div className="flex flex-col gap-4 mt-6">
         <h3 className="text-2xl font-bold">Histórico de entradas</h3>
-
-        {income.map((i) => {
-          return (
-            <div className="flex justify-between item-center" key={i.id}>
-              <div>
+        <div className="overflow-y-auto">
+          {income.map((i) => {
+            return (
+              <div className="flex justify-between item-center " key={i.id}>
                 <p className="font-semibold">{i.description}</p>
                 <small className="text-xs">
-                  {i.createdAt instanceof Date ? i.createdAt.toISOString() : ''}
+                  {i.createdAt instanceof Date ? i.createdAt.toISOString() : ""}
                 </small>
+
+                <p className="flex items-center gap-2">
+                  {currencyFormatter(i.amount)}
+                  {/* Botão para excluir a entrada de renda */}
+                  <button
+                    onClick={() => {
+                      deleteIncomeEntryHandler(i.id); // Chama a função para excluir a entrada de renda
+                    }}
+                  >
+                    <FaRegTrashAlt /> {/* Ícone de lixeira para excluir */}
+                  </button>
+                </p>
               </div>
-              <p className="flex items-center gap-2">
-                {currencyFormatter(i.amount)}
-                {/* Botão para excluir a entrada de renda */}
-                <button
-                  onClick={() => {
-                    deleteIncomeEntryHandler(i.id); // Chama a função para excluir a entrada de renda
-                  }}
-                >
-                  <FaRegTrashAlt /> {/* Ícone de lixeira para excluir */}
-                </button>
-              </p>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </Modal>
   );
