@@ -12,15 +12,19 @@ import AuthContextProvider from "@/lib/store/auth-context";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" data-theme="corporate">
       {/*
         <head /> will contain the components returned by the nearest parent
         head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>
-        <AuthContextProvider> {/* Verifica se está logado*/}
-          <FinanceContextProvider> {/* Traz as informações do banco para os componentes*/}
+      <body data-theme="light">
+        <AuthContextProvider>
+          {" "}
+          {/* Verifica se está logado*/}
+          <FinanceContextProvider>
+            {" "}
+            {/* Traz as informações do banco para os componentes*/}
             <ToastContainer limit={4} /> {/* Aviso */}
             <Nav /> {/* Navbar*/}
             {children}

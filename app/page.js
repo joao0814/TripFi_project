@@ -69,7 +69,7 @@ export default function Home() {
       />
 
       {/* Conteúdo principal da página */}
-      <main className="container max-w-7xl px-6 mx-auto">
+      <main className="container max-w-6xl px-6 mx-auto">
         <div className="pt-8">
           <div className="lg:flex lg:justify-between lg:items-start">
             {/* Coluna 1 */}
@@ -92,13 +92,13 @@ export default function Home() {
               <section className="flex items-center gap-2 py-3">
                 <button
                   onClick={() => setShowAddExpenseModal(true)}
-                  className="btn btn-primary"
+                  className="btn btn-primary border-hidden"
                 >
                   + Despesas
                 </button>
                 <button
                   onClick={() => setShowAddIncomeModal(true)}
-                  className="btn btn-primary-outline"
+                  className="btn btn-renda"
                 >
                   + Renda
                 </button>

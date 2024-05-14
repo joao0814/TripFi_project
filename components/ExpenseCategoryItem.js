@@ -25,7 +25,7 @@ function ExpenseCategoryItem({ expense }) {
         }}
       >
         {/* Componente que representa a categoria de despesa */}
-        <div className="flex items-center justify-between px-4 py-4 bg-slate-700 rounded-3xl">
+        <div className="flex items-center justify-between px-4 py-4 bg-slate-200 rounded-2xl">
           <div className="flex items-center gap-2">
             {/* Círculo colorido representando a categoria */}
             <div

@@ -12,7 +12,8 @@ import { toast } from "react-toastify";
 
 function ViewExpenseModal({ show, onClose, expense }) {
   // Contexto de finanças para acessar as funções de exclusão de despesas e categorias
-  const { deleteExpenseItem, deleteExpenseCategory } = useContext(financeContext);
+  const { deleteExpenseItem, deleteExpenseCategory } =
+    useContext(financeContext);
 
   // Função para excluir a categoria de despesa
   const deleteExpenseHandler = async () => {
@@ -47,11 +48,18 @@ function ViewExpenseModal({ show, onClose, expense }) {
 
   return (
     <Modal show={show} onClose={onClose}>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center  justify-between">
         {/* Título da categoria de despesa */}
-        <h2 className="text-4xl">{expense.title}</h2>
+
+        <div class=" modal-header flex text-center items-center pb-4 border-b">
+          <h2 class="text-xl font-semibold">{expense.title}</h2>
+        </div>
+        {/* <h2 className="text-4xl"></h2> */}
         {/* Botão para excluir a categoria de despesa */}
-        <button onClick={deleteExpenseHandler} className="btn btn-danger">
+        <button
+          onClick={deleteExpenseHandler}
+          className="btn btn-danger border-hidden"
+        >
           Deletar
         </button>
       </div>
