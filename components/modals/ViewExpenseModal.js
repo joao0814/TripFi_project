@@ -18,7 +18,7 @@ function ViewExpenseModal({ show, onClose, expense }) {
   // Função para excluir a categoria de despesa
   const deleteExpenseHandler = async () => {
     try {
-      await deleteExpenseCategory(expense.id); // Chama a função para excluir a categoria de despesa
+      await deleteExpenseCategory(expense.id); // Chama a funçãoo para excluir a categoria de despesa
       toast.success("Categoria de viagem apagada com sucesso!"); // Exibe um toast de sucesso após a exclusão
     } catch (error) {
       console.log(error.message);
