@@ -3,14 +3,20 @@ function Modal({ show, onClose, children }) {
   return (
     // Div que representa o modal, com estilos de transição baseados na propriedade show
     <div
+      onClick={() => {
+        onClose(false); // Chama a função onClose quando o botão é clicado para fechar o modal
+      }}
       style={{
         transform: show ? "translateX(0%)" : "translateX(-200%)", // Define a posição do modal com base na propriedade show
         overflow: show ? "auto" : "hidden", // Controla a rolagem da página enquanto o modal está aberto
       }}
       className="fixed top-0 left-0 flex flex-col justify-center items-center w-full h-screen z-50 transition-opacity duration-1000 backdrop-blur-sm bg-slate/50" // Estilos CSS para posicionamento e transição suave
     >
-      {/* Conteúdo do modal */}
+      {/* Conteúdo do modal */}{" "}
       <div
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
         data-theme="light"
         className="container mx-auto max-w-2xl min-h-[80vh] rounded-2xl bg-slate-100 py-6 px-4 flex flex-col overflow-y-auto shadow-2xl"
       >

@@ -83,7 +83,7 @@ function AddExpensesModal({ show, onClose }) {
               onClick={() => {
                 setShowAddExpense(true);
               }}
-              className="text-lime-400"
+              className="text-slate-700"
             >
               + Nova categoria
             </button>
@@ -92,9 +92,11 @@ function AddExpensesModal({ show, onClose }) {
           {/* Formulário para adicionar nova categoria */}
           {showAddExpense && (
             <div className="flex items-center justify-between">
-              <input type="text" placeholder="Coloque o nome" ref={titleRef} /> {/* Campo para inserir o título da nova categoria */}
+              <input type="text" placeholder="Coloque o nome" ref={titleRef} />{" "}
+              {/* Campo para inserir o título da nova categoria */}
               <label>Escolha a cor</label>
-              <input type="color" className="w-24 h-10" ref={colorRef} /> {/* Campo para escolher a cor da nova categoria */}
+              <input type="color" className="w-24 h-10" ref={colorRef} />{" "}
+              {/* Campo para escolher a cor da nova categoria */}
               <button
                 onClick={addCategoryHandler} // Ao clicar, chama a função para adicionar nova categoria
                 className="btn btn-primary-outline"
@@ -126,7 +128,7 @@ function AddExpensesModal({ show, onClose }) {
                     boxShadow:
                       expense.id === selectedCategory ? "1px 1px 4px" : "none",
                   }}
-                  className="flex items-center justify-between px-4 py-4 bg-slate-700 rounded-3xl"
+                  className="flex items-center justify-between px-4 py-4 bg-slate-200 rounded-2xl"
                 >
                   <div className="flex items-center gap-2">
                     {/* Círculo colorido para representar a categoria */}
@@ -136,7 +138,8 @@ function AddExpensesModal({ show, onClose }) {
                         backgroundColor: expense.color,
                       }}
                     />
-                    <h4 className="capitalize">{expense.title}</h4> {/* Título da categoria */}
+                    <h4 className="capitalize">{expense.title}</h4>{" "}
+                    {/* Título da categoria */}
                   </div>
                 </div>
               </button>

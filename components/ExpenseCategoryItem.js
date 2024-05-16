@@ -29,11 +29,14 @@ function ExpenseCategoryItem({ expense }) {
           <div className="flex items-center gap-2">
             {/* Círculo colorido representando a categoria */}
             <div
-              className="w-[25px] h-[25px] rounded-full"
+              className="w-[25px] h-[25px] rounded-full shrink-0"
               style={{ backgroundColor: expense.color }}
             />
             {/* Título da categoria */}
-            <h4 className="capitalize text-left">{expense.title}</h4>
+
+            <h4 className=" text-ellipsis capitalize text-left line-clamp-1 ">
+              {expense.title}
+            </h4>
           </div>
           {/* Valor total da categoria de despesa */}
           <p>{currencyFormatter(expense.total)}</p>

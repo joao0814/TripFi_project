@@ -69,7 +69,7 @@ export default function Home() {
       />
 
       {/* Conteúdo principal da página */}
-      <main className="container max-w-6xl px-6 mx-auto">
+      <main className="container max-w-6xl px-6 mx-auto h-full ">
         <div className="pt-8">
           <div className="lg:flex lg:justify-between lg:items-start">
             {/* Coluna 1 */}
@@ -112,7 +112,7 @@ export default function Home() {
                 <h2 className="text-4xl font-semibold pb-4">
                   Minhas despesas por categoria:
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 	">
                   {expenses.map((expense, index) => (
                     <ExpenseCategoryItem key={index} expense={expense} />
                   ))}
