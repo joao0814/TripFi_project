@@ -19,9 +19,10 @@ O TripFi é uma aplicação web simples de controle de despesas desenvolvido par
 O TripFi foi desenvolvido utilizando as seguintes tecnologias:
 
 <div style="display: flex;">
-  <img src="/public/next.png" alt="Next.js Logo" width="70" style="vertical-align: middle;"> 
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/320px-React-icon.svg.png" alt="React Logo" width="70" style="vertical-align: middle;">
-  <img src="/public/mysql.png" alt="MySQL Logo" width="80" style="vertical-align: middle;">
+  <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" alt="JavaScript Logo" width="60" style="vertical-align: middle;">
+  <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" alt="React Logo" width="65" style="vertical-align: middle;">
+  <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/nextjs-colored.svg" alt="Next.js Logo" width="65" style="vertical-align: middle;"> 
+  <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/firebase/firebase.png" alt="Firabase Logo" width="60" style="vertical-align: middle;">
 </div>
 
 ## Contato
