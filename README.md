@@ -1,6 +1,6 @@
 # TripFi
 
-O TripFi é um aplicativo simples de controle de despesas desenvolvido para ajudar viajantes a gerenciar seus gastos durante suas jornadas. Com o TripFi, você pode registrar facilmente suas despesas de viagem, acompanhar seu orçamento e obter insights sobre seus hábitos de gastos.
+O TripFi é uma aplicação web simples de controle de despesas desenvolvido para ajudar viajantes a gerenciar seus gastos durante suas jornadas. Com o TripFi, você pode registrar facilmente suas despesas de viagem, acompanhar seu orçamento e obter insights sobre seus hábitos de gastos.
 
 ## Funcionalidades Principais
 
