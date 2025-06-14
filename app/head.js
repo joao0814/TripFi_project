@@ -1,10 +1,12 @@
 export default function Head() {
   return (
     <>
-      <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
+      <title>TripFi - Suas Finanças em Viagem</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
-      <meta name="description" content={process.env.NEXT_PUBLIC_APP_DESCRIPTION} />
-      <link rel="icon" href="/favicon.ico" />
+      <meta name="description" content="Gerencie suas finanças durante suas viagens com o TripFi" />
+      <link rel="icon" href="/tripfi-icon.svg" />
+      <link rel="apple-touch-icon" href="/tripfi-icon.svg" />
+      <meta name="theme-color" content="#ffffff" />
     </>
   );
 }
