@@ -25,6 +25,32 @@ O TripFi foi desenvolvido utilizando as seguintes tecnologias:
   <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/firebase/firebase.png" alt="Firabase Logo" width="60" style="vertical-align: middle;">
 </div>
 
+## Configuração do Ambiente
+
+1. Clone o repositório
+2. Instale as dependências com `npm install`
+3. Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+
+```env
+# Configurações do Firebase
+NEXT_PUBLIC_FIREBASE_API_KEY=seu_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=seu_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=seu_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=seu_storage_bucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=seu_messaging_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=seu_app_id
+
+# Configurações do Next.js
+NEXT_PUBLIC_APP_NAME=TripFi
+NEXT_PUBLIC_APP_DESCRIPTION=Controle de despesas para viajantes
+NEXT_PUBLIC_APP_EMAIL=seu_email@exemplo.com
+
+# Configurações de Ambiente
+NODE_ENV=development
+```
+
+4. Execute o projeto com `npm run dev`
+
 ## Contato
 
-Se você tiver alguma dúvida ou sugestão sobre o TripFi, entre em contato conosco pelo email [joaopmfranca@gmail.com].
+Se você tiver alguma dúvida ou sugestão sobre o TripFi, entre em contato conosco pelo email [seu_email@exemplo.com].

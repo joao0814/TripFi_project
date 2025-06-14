@@ -35,6 +35,7 @@ function SignIn() {
                 width={600} // Largura da imagem
                 height={600} // Altura da imagem
                 alt="Banner image" // Texto alternativo da imagem
+                priority
               />
             </div>
           </div>
