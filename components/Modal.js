@@ -1,38 +1,53 @@
+import React from "react";
+
 // Componente de modal reutilizável para exibir conteúdo
 function Modal({ show, onClose, children }) {
+  // Adicionar/remover classe do body quando modal abrir/fechar
+  React.useEffect(() => {
+    if (show) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+    
+    // Cleanup: remover classe quando componente desmontar
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, [show]);
+
+  if (!show) return null;
+
   return (
-    // Div que representa o modal, com estilos de transição baseados na propriedade show
     <div
       onClick={() => {
         onClose(false); // Chama a função onClose quando o botão é clicado para fechar o modal
       }}
-      style={{
-        transform: show ? "translateX(0%)" : "translateX(-200%)", // Define a posição do modal com base na propriedade show
-        overflow: show ? "auto" : "hidden", // Controla a rolagem da página enquanto o modal está aberto
-      }}
-      className="fixed top-0 left-0 flex flex-col justify-center items-center w-full h-screen z-50 transition-opacity duration-1000 backdrop-blur-sm bg-slate/50" // Estilos CSS para posicionamento e transição suave
+      className="modal-overlay flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fade-in"
     >
-      {/* Conteúdo do modal */}{" "}
+      {/* Conteúdo do modal */}
       <div
         onClick={(e) => {
           e.stopPropagation();
         }}
-        data-theme="light"
-        className="container mx-auto max-w-2xl min-h-[80vh] rounded-2xl bg-slate-100 py-6 px-4 flex flex-col overflow-y-auto shadow-2xl"
+        className="relative w-full max-w-2xl max-h-[90vh] bg-white rounded-2xl shadow-2xl animate-slide-up overflow-hidden"
       >
-        {/* Container do modal com estilos personalizados */}
-        {/* Botão para fechar o modal */}
-
+        {/* Conteúdo do modal */}
+        <div className="p-8 overflow-y-auto max-h-[90vh] modal-content relative">
+          {children}
+        </div>
+        
+        {/* Botão para fechar o modal - posicionado sobre o conteúdo */}
         <button
           onClick={() => {
             onClose(false); // Chama a função onClose quando o botão é clicado para fechar o modal
           }}
-          className="w-10 h-10 mb-4 btn btn-sm btn-circle btn-ghost" // Estilos para o botão de fechar
+          className="absolute top-4 right-4 z-[100] w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 group shadow-lg"
         >
-          ✕ {/* Ícone ou texto de fechamento do modal */}
+          <svg className="w-5 h-5 text-gray-600 group-hover:text-gray-800 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
-        {/* Adicionando a propriedade overflow-hidden para impedir a rolagem do conteúdo abaixo do modal */}
-        <div className={show ? "overflow-hidden" : ""}>{children}</div>
       </div>
     </div>
   );

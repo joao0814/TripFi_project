@@ -69,117 +69,156 @@ export default function Home() {
       />
 
       {/* Conteúdo principal da página */}
-      <main className="container max-w-6xl px-6 mx-auto h-full ">
-        <div className="pt-8">
-          <div className="lg:flex lg:justify-between lg:items-start">
-            {/* Coluna 1 */}
-            <div className="lg:w-1/2">
-              <div className="text-center">
-                <h1 className="text-4xl text-left font-bold">
-                  Registre suas despesas de maneira fácil e rápida!
-                </h1>
-              </div>
-
-              {/* Passos para o usuário */}
-              <section className="pt-8">
-                <h1 className="text-3xl pb-2">Meu saldo:</h1>
-                <h2 className="text-4xl font-bold">
-                  {currencyFormatter(balance)}
-                </h2>
-              </section>
-
-              {/* Botões para adicionar despesas e receitas */}
-              <section className="flex items-center gap-2 py-3">
-                <button
-                  onClick={() => setShowAddExpenseModal(true)}
-                  className="btn btn-primary border-hidden"
-                >
-                  + Despesas
-                </button>
-                <button
-                  onClick={() => setShowAddIncomeModal(true)}
-                  className="btn btn-renda"
-                >
-                  + Renda
-                </button>
-              </section>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 modal-container">
+        <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 modal-container">
+          <div className="animate-fade-in">
+            {/* Header Section */}
+            <div className="text-center mb-12">
+              <h1 className="text-5xl md:text-6xl font-bold gradient-text mb-4">
+                Controle Financeiro
+              </h1>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Gerencie suas finanças de forma inteligente e visual
+              </p>
             </div>
 
-            {/* Coluna 2 */}
-            <div className="lg:w-1/2">
-              {/* Exibição de despesas por categoria */}
-              <div className="px-5">
-                <h2 className="text-4xl font-semibold pb-4">
-                  Minhas despesas por categoria:
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 	">
-                  {expenses.map((expense, index) => (
-                    <ExpenseCategoryItem key={index} expense={expense} />
-                  ))}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+              <div className="lg:col-span-1">
+                <div className="card p-8 text-center">
+                  <div className="mb-6">
+                   
+                    <h2 className="text-2xl font-semibold text-gray-700 mb-2">Saldo Atual</h2>
+                    <p className="text-4xl font-bold gradient-text">
+                      {currencyFormatter(balance)}
+                    </p>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <button
+                      onClick={() => setShowAddExpenseModal(true)}
+                      className="btn btn-primary w-[50%] justify-center"
+                    >
+                      
+                      <span>Adicionar Despesa</span>
+                    </button>
+                    <button
+                      onClick={() => setShowAddIncomeModal(true)}
+                      className="btn btn-primary w-[50%] justify-center"
+                    >
+                     
+                      <span>Adicionar Renda</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Categorias Card */}
+              <div className="lg:col-span-2">
+                <div className="card p-8">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span className="mr-3">📊</span>
+                    Despesas por Categoria
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {expenses.length > 0 ? (
+                      expenses.map((expense, index) => (
+                        <ExpenseCategoryItem key={index} expense={expense} />
+                      ))
+                    ) : (
+                      <div className="col-span-2 text-center py-12">
+                        <div className="text-6xl mb-4">📈</div>
+                        <p className="text-gray-500 text-lg">
+                          Nenhuma despesa registrada ainda
+                        </p>
+                        <p className="text-gray-400">
+                          Adicione sua primeira despesa para começar
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Gráfico de despesas */}
-          <div className="text-center pt-8" id="stats">
-            <h3 className="text-3xl font-semibold">Despesas por categoria</h3>
-            <div className="mx-auto" style={{ maxWidth: "600px" }}>
-              <Doughnut
-                data={{
-                  labels: expenses.map((expense) => expense.title),
-                  datasets: [
-                    {
-                      label: "Despesas",
-                      data: expenses.map((expense) => expense.total),
-                      backgroundColor: expenses.map((expense) => expense.color),
-                      borderColor: "#18181b",
-                      borderWidth: 0,
-                    },
-                  ],
-                }}
-                options={{
-                  responsive: true,
-                  maintainAspectRatio: false,
-                  plugins: {
-                    legend: {
-                      display: true,
-                      position: "top",
-                      labels: {
-                        padding: 20,
-                        usePointStyle: false,
-                        font: {
-                          size: 12,
+            {/* Gráfico Section */}
+            {expenses.length > 0 && (
+              <div className="card p-8 mb-8 animate-slide-up" id="stats">
+                <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+                  📈 Análise Visual das Despesas
+                </h3>
+                <div className="max-w-2xl mx-auto">
+                  <Doughnut
+                    data={{
+                      labels: expenses.map((expense) => expense.title),
+                      datasets: [
+                        {
+                          label: "Despesas",
+                          data: expenses.map((expense) => expense.total),
+                          backgroundColor: expenses.map((expense) => expense.color),
+                          borderColor: "#ffffff",
+                          borderWidth: 3,
+                          hoverBorderWidth: 5,
+                        },
+                      ],
+                    }}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: true,
+                      plugins: {
+                        legend: {
+                          display: true,
+                          position: "bottom",
+                          labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyle: "circle",
+                            font: {
+                              size: 14,
+                              weight: "500",
+                            },
+                            color: "#374151",
+                          },
+                        },
+                        tooltip: {
+                          backgroundColor: "rgba(0, 0, 0, 0.8)",
+                          titleColor: "#fff",
+                          bodyColor: "#fff",
+                          borderColor: "#667eea",
+                          borderWidth: 1,
+                          cornerRadius: 8,
                         },
                       },
-                    },
-                  },
-                  animations: {
-                    tension: {
-                      duration: 1000,
-                      easing: "linear",
-                      from: 1,
-                      to: 0,
-                      loop: true,
-                    },
-                  },
-                }}
-                style={{ width: "100%", height: "auto" }}
-              />
+                      animations: {
+                        animateRotate: true,
+                        animateScale: true,
+                      },
+                    }}
+                    style={{ width: "100%", height: "400px" }}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Resumo Section */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="card p-6 text-center">
+                <div className="text-3xl mb-2">💸</div>
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">Total de Despesas</h3>
+                <p className="text-3xl font-bold text-red-600">
+                  {currencyFormatter(totalExpenses)}
+                </p>
+              </div>
+              <div className="card p-6 text-center">
+                <div className="text-3xl mb-2">📊</div>
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">Categorias Ativas</h3>
+                <p className="text-3xl font-bold text-blue-600">
+                  {expenses.length}
+                </p>
+              </div>
             </div>
           </div>
-
-          {/* Total de despesas */}
-          <div className="text-center pt-4">
-            <p className="text-xl ">
-              Total de despesas:
-              <p className="text-2xl font-semibold">
-                {currencyFormatter(totalExpenses)}
-              </p>
-            </p>
-          </div>
         </div>
-      </main>
+      </div>
     </>
   );
 }

@@ -2,26 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Variáveis CSS para tema moderno */
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --shadow-soft: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --shadow-hover: 0 15px 35px rgba(31, 38, 135, 0.2);
+}
 
-/* width */
+/* Scrollbar moderno */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  transition: all 0.3s ease;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
 }
 
 @layer base {
@@ -30,14 +40,14 @@
   }
 
   body {
-    @apply relative text-white bg-slate-300;
+    @apply relative text-gray-800 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   .desktop {
     display: block;
   }
 
-  /* Esconde os elementos com a classe .desktop quando a largura da janela for menor que 600px */
   @media screen and (max-width: 600px) {
     .desktop {
       display: none;
@@ -46,48 +56,274 @@
 
   .navbar-logged-out {
     display: none;
-    /* esconde a barra de navegação */
   }
 
   .navbar-logged-in {
     display: block;
-    /* mostra a barra de navegação */
   }
 
   button {
-    @apply transition-all duration-100 hover:scale-110 hover:relative;
+    @apply transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95;
   }
-  
 
   input {
-    @apply px-4 py-2 bg-slate-200 rounded-xl;
+    @apply px-4 py-3 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300;
+  }
+
+  input:focus {
+    @apply shadow-lg;
   }
 }
 
 @layer utilities {
   .btn {
-    @apply self-start px-4 py-2 text-sm capitalize rounded-xl;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium capitalize rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl min-h-[44px] text-center whitespace-nowrap;
+  }
+
+  .btn .icon {
+    @apply flex-shrink-0 text-base leading-none;
+  }
+
+  .btn span:not(.icon) {
+    @apply leading-tight flex-1 text-center;
   }
 
   .btn-primary {
-    @apply  bg-slate-300  text-slate-900  hover:text-white;
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 border-0;
   }
 
   .btn-renda {
-
-    @apply  bg-lime-600   text-white  hover:bg-lime-600;
-    
+    @apply bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:from-emerald-600 hover:to-teal-700 border-0;
   }
 
   .btn-danger {
-    @apply text-white bg-red-700 hover:bg-red-600 ;
+    @apply bg-gradient-to-r from-red-500 to-pink-600 text-white hover:from-red-600 hover:to-pink-700 border-0;
+  }
+
+  .btn-secondary {
+    @apply bg-white/20 backdrop-blur-sm text-gray-700 border border-gray-200 hover:bg-white/30 hover:border-gray-300;
   }
 
   .input-group {
-    @apply flex flex-col gap-4;
+    @apply flex flex-col gap-3;
   }
 
   .steps {
-    @apply text-lime-400;
+    @apply text-emerald-500;
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+
+  /* Card moderno */
+  .card {
+    @apply bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+  }
+
+  /* Animações suaves */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0; 
+      transform: translateY(20px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+
+  /* Estilos para toast notifications */
+  .toast-container {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .Toastify__toast {
+    border-radius: 12px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .Toastify__toast--success {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+  }
+
+  .Toastify__toast--error {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important;
+  }
+
+  /* Melhorias para scrollbar em modais */
+  .modal-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .modal-scroll::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+  }
+
+  .modal-scroll::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+  }
+
+  .modal-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  /* Efeito de hover para cards */
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Animações de entrada para elementos */
+  .animate-bounce-in {
+    animation: bounceIn 0.6s ease-out;
+  }
+
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Gradientes personalizados para diferentes estados */
+  .gradient-success {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .gradient-warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  }
+
+  .gradient-info {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  }
+
+  /* Garantir que modais apareçam sobre todos os elementos */
+  .modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 9999 !important;
+  }
+
+  /* Garantir que containers não interfiram com modais */
+  .card {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+  }
+
+  .card * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Garantir que modais não sejam afetados por overflow dos pais */
+  .modal-container {
+    overflow: visible !important;
+  }
+
+  /* Garantir que todos os containers permitam modais */
+  .container, .grid, .flex {
+    overflow: visible;
+  }
+
+  /* Garantir que o body não interfira com modais */
+  body.modal-open {
+    overflow: hidden;
+  }
+
+  /* Garantir que modais sempre apareçam sobre tudo */
+  .modal-overlay {
+    isolation: isolate;
+    will-change: transform;
+  }
+
+  /* Garantir que o conteúdo do modal tenha z-index alto */
+  .modal-overlay > div {
+    position: relative;
+    z-index: 10000;
+  }
+
+  /* Garantir que modais renderizados via Portal tenham z-index correto */
+  body > div[data-react-portal] {
+    z-index: 9999 !important;
+  }
+
+  /* Garantir que modais via Portal apareçam sobre tudo */
+  body > div[data-react-portal] .modal-overlay {
+    z-index: 9999 !important;
+  }
+
+  /* Garantir que todos os modais via Portal tenham posicionamento correto */
+  body > div[style*="z-index: 9999"] {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 9999 !important;
+  }
+
+  /* Garantir que botões de deletar tenham z-index adequado */
+  .modal-content button {
+    position: relative;
+    z-index: 10;
+  }
+
+  .modal-content button:hover {
+    z-index: 20;
+  }
+
+  /* Garantir que botões de deletar não fiquem atrás do botão de fechar */
+  .modal-content .btn-danger {
+    z-index: 15 !important;
+  }
+
+  /* Garantir que botões de deletar item tenham z-index adequado */
+  .modal-content .btn-danger:hover {
+    z-index: 25 !important;
   }
 }

@@ -5,6 +5,7 @@ import { financeContext } from "@/lib/store/finance-context"; // Contexto financ
 import { v4 as uuidv4 } from "uuid"; // Pacote para gerar IDs únicos
 import Modal from "@/components/Modal"; // Componente de modal para adicionar despesas
 import { toast } from "react-toastify"; // Pacote para exibir mensagens de notificação
+import { currencyFormatter } from "@/lib/utils"; // Importa o componente de formatação de moeda
 
 // Componente AddExpensesModal para adicionar despesas
 function AddExpensesModal({ show, onClose }) {
@@ -70,104 +71,152 @@ function AddExpensesModal({ show, onClose }) {
   return (
     // Modal de adicionar despesa
     <Modal show={show} onClose={onClose}>
-      <div className="text-center pb-5">
-        <h1 className="text-3xl">Despesas</h1>
+      <div className="text-center mb-8">
+        <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-red-500 to-pink-600 rounded-2xl flex items-center justify-center">
+          <span className="text-3xl">💸</span>
+        </div>
+        <h1 className="text-3xl font-bold gradient-text">Adicionar Despesa</h1>
+        <p className="text-gray-600 mt-2">Registre um novo gasto em sua conta</p>
+      </div>
+
+      {/* Campo para inserção do valor da despesa */}
+      <div className="mb-8">
+        <label className="block text-lg font-semibold text-gray-700 mb-3">
+          💰 Valor da Despesa
+        </label>
+        <input
+          type="number"
+          min={0.01}
+          step={0.01}
+          placeholder="Digite o valor do gasto"
+          value={expenseAmount}
+          onChange={(e) => {
+            setExpenseAmount(e.target.value);
+          }}
+          className="w-full text-lg"
+        />
       </div>
 
       {/* Lista de categorias de despesas */}
       {expenseAmount > 0 && (
-        <div className="flex flex-col gap-4 mt-6 pb-4">
+        <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h3 className="text-2xl capitalize">Selecione a categoria</h3>
+            <h3 className="text-xl font-semibold text-gray-800">
+              📂 Selecione a categoria
+            </h3>
             <button
               onClick={() => {
                 setShowAddExpense(true);
               }}
-              className="text-slate-700"
+              className="btn btn-secondary text-sm"
             >
-              + Nova categoria
+              <span className="icon">➕</span>
+              <span>Nova categoria</span>
             </button>
           </div>
 
           {/* Formulário para adicionar nova categoria */}
           {showAddExpense && (
-            <div className="flex items-center justify-between">
-              <input type="text" placeholder="Coloque o nome" ref={titleRef} />{" "}
-              {/* Campo para inserir o título da nova categoria */}
-              <label>Escolha a cor</label>
-              <input type="color" className="w-24 h-10" ref={colorRef} />{" "}
-              {/* Campo para escolher a cor da nova categoria */}
-              <button
-                onClick={addCategoryHandler} // Ao clicar, chama a função para adicionar nova categoria
-                className="btn btn-primary-outline"
-              >
-                Criar
-              </button>
-              <button
-                onClick={() => {
-                  setShowAddExpense(false);
-                }}
-                className="btn btn-danger"
-              >
-                Cancelar
-              </button>
+            <div className="card p-6 space-y-4">
+              <h4 className="text-lg font-semibold text-gray-800">Criar Nova Categoria</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Nome da categoria
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="Ex: Alimentação" 
+                    ref={titleRef}
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Cor da categoria
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <input 
+                      type="color" 
+                      className="w-12 h-12 rounded-lg border-2 border-gray-200" 
+                      ref={colorRef}
+                    />
+                    <span className="text-sm text-gray-500">Escolha uma cor</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <button
+                  onClick={addCategoryHandler}
+                  className="btn btn-primary flex-1"
+                >
+                  <span className="icon">✅</span>
+                  <span>Criar Categoria</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setShowAddExpense(false);
+                  }}
+                  className="btn btn-danger flex-1"
+                >
+                  <span className="icon">❌</span>
+                  <span>Cancelar</span>
+                </button>
+              </div>
             </div>
           )}
 
           {/* Lista de categorias existentes */}
-          {expenses.map((expense) => {
-            return (
-              <button
-                key={expense.id}
-                onClick={() => {
-                  setSelectedCategory(expense.id);
-                }}
-              >
-                <div
-                  style={{
-                    boxShadow:
-                      expense.id === selectedCategory ? "1px 1px 4px" : "none",
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {expenses.map((expense) => {
+              return (
+                <button
+                  key={expense.id}
+                  onClick={() => {
+                    setSelectedCategory(expense.id);
                   }}
-                  className="flex items-center justify-between px-4 py-4 bg-slate-200 rounded-2xl"
+                  className="w-full group"
                 >
-                  <div className="flex items-center gap-2">
-                    {/* Círculo colorido para representar a categoria */}
-                    <div
-                      className="w-[25px] h-[25px] rounded-full"
-                      style={{
-                        backgroundColor: expense.color,
-                      }}
-                    />
-                    <h4 className="capitalize">{expense.title}</h4>{" "}
-                    {/* Título da categoria */}
+                  <div
+                    className={`card p-4 transition-all duration-300 ${
+                      expense.id === selectedCategory 
+                        ? 'ring-2 ring-blue-500 bg-blue-50' 
+                        : 'hover:shadow-lg'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div
+                        className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold shadow-lg"
+                        style={{ backgroundColor: expense.color }}
+                      >
+                        {expense.title.charAt(0).toUpperCase()}
+                      </div>
+                      <div className="text-left">
+                        <h4 className="font-semibold text-gray-800 capitalize group-hover:text-blue-600 transition-colors">
+                          {expense.title}
+                        </h4>
+                        <p className="text-sm text-gray-500">
+                          {currencyFormatter(expense.total)} gastos
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </button>
-            );
-          })}
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
 
-      {/* Campo para inserção do valor da despesa */}
-      <div className="flex flex-col gap-4">
-        <label>Insira um valor</label>
-        <input
-          type="number"
-          min={0.01}
-          step={0.01}
-          placeholder="Valor do gasto"
-          value={expenseAmount}
-          onChange={(e) => {
-            setExpenseAmount(e.target.value);
-          }}
-        />
-      </div>
-
       {/* Botão para adicionar a despesa */}
       {expenseAmount > 0 && selectedCategory && (
-        <div className="flex justify-center mt-6">
-          <button className="btn btn-primary" onClick={addExpenseItemHandler}>
-            Adicione o gasto
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <button 
+            className="btn btn-primary w-full text-lg py-4" 
+            onClick={addExpenseItemHandler}
+          >
+            <span className="icon">💸</span>
+            <span>Adicionar Despesa de {currencyFormatter(expenseAmount)}</span>
           </button>
         </div>
       )}

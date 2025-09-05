@@ -60,68 +60,110 @@ function AddIncomeModal({ show, onClose }) {
 
   return (
     <Modal show={show} onClose={onClose}>
-      <div className="text-center pb-5">
-        <h1 className="text-3xl">Entradas</h1>
+      <div className="text-center mb-8">
+        <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center">
+          <span className="text-3xl">💵</span>
+        </div>
+        <h1 className="text-3xl font-bold gradient-text">Adicionar Receita</h1>
+        <p className="text-gray-600 mt-2">Registre uma nova entrada em sua conta</p>
       </div>
-      <form onSubmit={addIncomeHandler} className="flex flex-col gap-4">
-        <div className="input-group">
-          <label htmlFor="amount">Valor</label>
-          <input
-            type="number"
-            name="amount"
-            ref={amountRef}
-            min={0.01}
-            step={0.01}
-            placeholder="Coloque o valor"
-            required
-          />
+
+      <form onSubmit={addIncomeHandler} className="space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="input-group">
+            <label htmlFor="amount" className="block text-lg font-semibold text-gray-700 mb-3">
+              💰 Valor da Receita
+            </label>
+            <input
+              type="number"
+              name="amount"
+              ref={amountRef}
+              min={0.01}
+              step={0.01}
+              placeholder="Digite o valor"
+              required
+              className="w-full text-lg"
+            />
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="description" className="block text-lg font-semibold text-gray-700 mb-3">
+              📝 Descrição
+            </label>
+            <input
+              name="description"
+              ref={descriptionRef}
+              type="text"
+              placeholder="Ex: Salário, Freelance..."
+              required
+              className="w-full text-lg"
+            />
+          </div>
         </div>
 
-        <div className="input-group">
-          <label htmlFor="description">Descrição</label>
-          <input
-            name="description"
-            ref={descriptionRef}
-            type="text"
-            placeholder="Coloque a descrição do valor"
-            required
-          />
-        </div>
-        <div className="flex justify-center mt-4">
-          <button type="submit" className="btn btn-primary">
-            Adicionar entrada
+        <div className="pt-4">
+          <button type="submit" className="btn btn-renda w-full text-lg py-4">
+            <span className="icon">💵</span>
+            <span>Adicionar Receita</span>
           </button>
         </div>
       </form>
 
       {/* Histórico de entradas */}
-      <div className="flex flex-col gap-4 mt-6">
-        <h3 className="text-2xl font-bold">Histórico de entradas</h3>
-        <div className="overflow-y-auto">
-          {income.map((i) => {
-            return (
-              <div className="flex justify-between item-center " key={i.id}>
-                <p className="font-semibold">{i.description}</p>
-                <small className="text-xs">
-                  {i.createdAt instanceof Date ? i.createdAt.toISOString() : ""}
-                </small>
-
-                <p className="flex items-center gap-2">
-                  {currencyFormatter(i.amount)}
-                  {/* Botão para excluir a entrada de renda */}
-                  <button
-                    onClick={() => {
-                      deleteIncomeEntryHandler(i.id); // Chama a função para excluir a entrada de renda
-                    }}
-                  >
-                    <FaRegTrashAlt /> {/* Ícone de lixeira para excluir */}
-                  </button>
-                </p>
-              </div>
-            );
-          })}
+      {income.length > 0 && (
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <span className="mr-3">📊</span>
+            Histórico de Receitas
+          </h3>
+          <div className="space-y-3 max-h-64 overflow-y-auto modal-scroll">
+            {income.map((i) => {
+              return (
+                <div className="card p-4 hover:shadow-lg transition-all duration-300" key={i.id}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <p className="font-semibold text-gray-800">{i.description}</p>
+                      <p className="text-sm text-gray-500">
+                        {i.createdAt instanceof Date 
+                          ? i.createdAt.toLocaleDateString('pt-BR', {
+                              day: '2-digit',
+                              month: '2-digit',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit'
+                            })
+                          : ""
+                        }
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-lg font-bold text-emerald-600">
+                        {currencyFormatter(i.amount)}
+                      </span>
+                      <button
+                        onClick={() => {
+                          deleteIncomeEntryHandler(i.id);
+                        }}
+                        className="w-8 h-8 bg-red-100 hover:bg-red-200 rounded-full flex items-center justify-center transition-colors duration-200 group"
+                      >
+                        <FaRegTrashAlt className="text-red-600 text-sm group-hover:text-red-700 transition-colors" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
+
+      {income.length === 0 && (
+        <div className="mt-8 pt-6 border-t border-gray-200 text-center">
+          <div className="text-4xl mb-4">📈</div>
+          <p className="text-gray-500 text-lg">Nenhuma receita registrada ainda</p>
+          <p className="text-gray-400">Adicione sua primeira receita para começar</p>
+        </div>
+      )}
     </Modal>
   );
 }
