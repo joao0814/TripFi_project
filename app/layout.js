@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Nav from "@/components/Navigation";
 import FinanceContextProvider from "@/lib/store/finance-context";
 import AuthContextProvider from "@/lib/store/auth-context";
+import ClientWrapper from "@/components/ClientWrapper";
 
 export default function RootLayout({ children }) {
   return (
@@ -19,32 +20,34 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body data-theme="light" suppressHydrationWarning className="min-h-screen">
-        <AuthContextProvider>
-          {/* Verifica se está logado*/}
-          <FinanceContextProvider>
-            {/* Traz as informações do banco para os componentes*/}
-            <div className="min-h-screen flex flex-col">
-              <Nav /> {/* Navbar*/}
-              <main className="flex-1">
-                {children}
-              </main>
-            </div>
-            <ToastContainer 
-              limit={4} 
-              position="top-right"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-              className="toast-container"
-            />
-          </FinanceContextProvider>
-        </AuthContextProvider>
+        <ClientWrapper>
+          <AuthContextProvider>
+            {/* Verifica se está logado*/}
+            <FinanceContextProvider>
+              {/* Traz as informações do banco para os componentes*/}
+              <div className="min-h-screen flex flex-col">
+                <Nav /> {/* Navbar*/}
+                <main className="flex-1">
+                  {children}
+                </main>
+              </div>
+              <ToastContainer 
+                limit={4} 
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                className="toast-container"
+              />
+            </FinanceContextProvider>
+          </AuthContextProvider>
+        </ClientWrapper>
       </body>
     </html>
   );

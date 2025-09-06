@@ -227,103 +227,87 @@
 
   /* Gradientes personalizados para diferentes estados */
   .gradient-success {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    @apply bg-gradient-to-br from-blue-500 to-purple-600;
   }
 
   .gradient-warning {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    @apply bg-gradient-to-br from-pink-400 to-red-500;
   }
 
   .gradient-info {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    @apply bg-gradient-to-br from-blue-400 to-cyan-400;
   }
 
   /* Garantir que modais apareçam sobre todos os elementos */
   .modal-overlay {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    z-index: 9999 !important;
+    @apply fixed inset-0 z-[9999];
   }
 
   /* Garantir que containers não interfiram com modais */
   .card {
-    position: relative;
-    z-index: 1;
-    overflow: visible;
+    @apply relative z-10 overflow-visible;
   }
 
   .card * {
-    position: relative;
-    z-index: 1;
+    @apply relative z-10;
   }
 
   /* Garantir que modais não sejam afetados por overflow dos pais */
   .modal-container {
-    overflow: visible !important;
+    @apply overflow-visible;
   }
 
   /* Garantir que todos os containers permitam modais */
   .container, .grid, .flex {
-    overflow: visible;
+    @apply overflow-visible;
   }
 
   /* Garantir que o body não interfira com modais */
   body.modal-open {
-    overflow: hidden;
+    @apply overflow-hidden;
   }
 
   /* Garantir que modais sempre apareçam sobre tudo */
   .modal-overlay {
-    isolation: isolate;
-    will-change: transform;
+    @apply isolate will-change-transform;
   }
 
   /* Garantir que o conteúdo do modal tenha z-index alto */
   .modal-overlay > div {
-    position: relative;
-    z-index: 10000;
+    @apply relative z-[10000];
   }
 
   /* Garantir que modais renderizados via Portal tenham z-index correto */
   body > div[data-react-portal] {
-    z-index: 9999 !important;
+    @apply z-[9999];
   }
 
   /* Garantir que modais via Portal apareçam sobre tudo */
   body > div[data-react-portal] .modal-overlay {
-    z-index: 9999 !important;
+    @apply z-[9999];
   }
 
   /* Garantir que todos os modais via Portal tenham posicionamento correto */
   body > div[style*="z-index: 9999"] {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    z-index: 9999 !important;
+    @apply fixed inset-0 z-[9999];
   }
 
   /* Garantir que botões de deletar tenham z-index adequado */
   .modal-content button {
-    position: relative;
-    z-index: 10;
+    @apply relative z-10;
   }
 
   .modal-content button:hover {
-    z-index: 20;
+    @apply z-20;
   }
 
   /* Garantir que botões de deletar não fiquem atrás do botão de fechar */
   .modal-content .btn-danger {
-    z-index: 15 !important;
+    @apply z-[15];
   }
 
   /* Garantir que botões de deletar item tenham z-index adequado */
   .modal-content .btn-danger:hover {
-    z-index: 25 !important;
+    @apply z-[25];
   }
 }

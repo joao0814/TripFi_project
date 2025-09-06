@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import { authContext } from "@/lib/store/auth-context"; // Importa o contexto de autenticação
 
@@ -9,71 +9,76 @@ import Image from "next/image"; // Importa o componente de imagem do Next.js
 
 function Nav() {
   const { user, loading, logout } = useContext(authContext); // Obtém informações do usuário e funções de autenticação do contexto de autenticação
+  const [isClient, setIsClient] = useState(false);
 
-  // Se o usuário não estiver logado ou o estado de carregamento for verdadeiro, não renderize o componente
-  if (!user && !loading) {
+  // Garante que o componente só renderize no cliente
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Se não estiver no cliente ou o usuário não estiver logado e não estiver carregando, não renderize o componente
+  if (!isClient || (!user && !loading)) {
     return null;
   }
 
   return (
-    <div className="bg-gray-700 py-3 w-full">
-      {" "}
-      {/* Barra de navegação */}
-      <div className="flex items-center justify-between px-10">
-        {" "}
-        {/* Container flexível para o conteúdo da barra de navegação */}
-        {/* Informações do usuário */}
-        {user &&
-          !loading && ( // Renderiza apenas se o usuário estiver autenticado e o estado de carregamento for falso
-            <div className="flex flex-col items-center gap-2">
-              {" "}
-              {/* Container flexível para as informações do usuário */}
-              <Image // Componente de imagem do Next.js para renderizar o logo
-                src="/logo.svg" // Caminho para o arquivo de imagem do logo
-                width={80} // Largura da imagem
-                height={40} // Altura da imagem
-                alt={user.displayName} // Texto alternativo para a imagem
+    <div className="bg-white/90 backdrop-blur-sm border-b border-gray-200 py-4 w-full shadow-sm">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          {user && !loading && (
+            <div className="flex items-center">
+              <Image
+                src="/logo.svg"
+                width={120}
+                height={36}
+                alt="TripFi Logo"
+                className="h-9 w-auto"
+                style={{
+                  filter: 'brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%)'
+                }}
               />
             </div>
           )}
-        {/* Lado direito da barra de navegação */}
-        {user &&
-          !loading && ( // Renderiza apenas se o usuário estiver autenticado e o estado de carregamento for falso
-            <nav className="flex items-center gap-4">
-              {" "}
-              {/* Navegação com espaçamento entre os itens */}
+          
+          {/* Navegação */}
+          {user && !loading && (
+            <nav className="flex items-center gap-6">
               <div className="desktop">
-                {" "}
-                {/* Renderiza apenas em telas maiores (desktop) */}
-                <a href="#stats">
-                  {" "}
-                  {/* Link para a seção de estatísticas */}
-                  <ImStatsBars className="text-2xl text-white" />{" "}
-                  {/* Ícone de estatísticas */}
+                <a 
+                  href="#stats"
+                  className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                >
+                  <ImStatsBars className="text-lg" />
+                  <span className="text-sm font-medium">Estatísticas</span>
                 </a>
               </div>
-              <div>
+              
+              <div className="flex items-center gap-4">
+                <div className="desktop">
+                  <div className="flex items-center gap-3">
+                    <img
+                      className="w-8 h-8 rounded-full object-cover border-2 border-gray-200"
+                      src={user.photoURL}
+                      alt={user.displayName}
+                      referrerPolicy="no-referrer"
+                    />
+                    <span className="text-sm font-medium text-gray-700 hidden sm:block">
+                      {user.displayName}
+                    </span>
+                  </div>
+                </div>
+                
                 <button
                   onClick={logout}
-                  className="btn btn-danger border-hidden"
+                  className="btn btn-danger text-sm px-4 py-2"
                 >
-                  {" "}
-                  {/* Botão para fazer logout */}
                   Sair
                 </button>
               </div>
-              <div className="desktop">
-                {" "}
-                {/* Renderiza apenas em telas maiores (desktop) */}
-                <img
-                  className="object-cover w-[40px] h-[40px] rounded-full" // Estilo para a imagem do perfil do usuário
-                  src={user.photoURL} // URL da imagem do perfil do usuário
-                  alt={user.displayName} // Texto alternativo para a imagem do perfil do usuário
-                  referrerPolicy="no-referrer" // Política de referência para a imagem do perfil do usuário
-                />
-              </div>
             </nav>
           )}
+        </div>
       </div>
     </div>
   );

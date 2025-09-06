@@ -55,6 +55,7 @@ export default function Home() {
     return <SignIn />;
   }
 
+
   // Renderiza o conteúdo da página
   return (
     <>
@@ -70,83 +71,95 @@ export default function Home() {
 
       {/* Conteúdo principal da página */}
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 modal-container">
-        <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 modal-container">
+        <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 modal-container">
           <div className="animate-fade-in">
             {/* Header Section */}
-            <div className="text-center mb-12">
-              <h1 className="text-5xl md:text-6xl font-bold gradient-text mb-4">
+            <div className="text-center mb-8">
+              <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-3">
                 Controle Financeiro
               </h1>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                 Gerencie suas finanças de forma inteligente e visual
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-              <div className="lg:col-span-1">
-                <div className="card p-8 text-center">
-                  <div className="mb-6">
-                   
-                    <h2 className="text-2xl font-semibold text-gray-700 mb-2">Saldo Atual</h2>
-                    <p className="text-4xl font-bold gradient-text">
-                      {currencyFormatter(balance)}
-                    </p>
-                  </div>
-                  
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <button
-                      onClick={() => setShowAddExpenseModal(true)}
-                      className="btn btn-primary w-[50%] justify-center"
-                    >
-                      
-                      <span>Adicionar Despesa</span>
-                    </button>
-                    <button
-                      onClick={() => setShowAddIncomeModal(true)}
-                      className="btn btn-primary w-[50%] justify-center"
-                    >
-                     
-                      <span>Adicionar Renda</span>
-                    </button>
-                  </div>
-                </div>
+            {/* Cards de Resumo */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="card p-6 text-center">
+                <div className="text-3xl mb-3">💰</div>
+                <h2 className="text-xl font-semibold text-gray-700 mb-2">Saldo Atual</h2>
+                <p className="text-3xl font-bold gradient-text">
+                  {currencyFormatter(balance)}
+                </p>
               </div>
+              
+              <div className="card p-6 text-center">
+                <div className="text-3xl mb-3">💸</div>
+                <h2 className="text-xl font-semibold text-gray-700 mb-2">Total de Despesas</h2>
+                <p className="text-3xl font-bold text-red-600">
+                  {currencyFormatter(totalExpenses)}
+                </p>
+              </div>
+              
+              <div className="card p-6 text-center">
+                <div className="text-3xl mb-3">📊</div>
+                <h2 className="text-xl font-semibold text-gray-700 mb-2">Categorias Ativas</h2>
+                <p className="text-3xl font-bold text-blue-600">
+                  {expenses.length}
+                </p>
+              </div>
+            </div>
 
-              {/* Categorias Card */}
-              <div className="lg:col-span-2">
-                <div className="card p-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-6 flex items-center">
-                    <span className="mr-3">📊</span>
-                    Despesas por Categoria
-                  </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {expenses.length > 0 ? (
-                      expenses.map((expense, index) => (
-                        <ExpenseCategoryItem key={index} expense={expense} />
-                      ))
-                    ) : (
-                      <div className="col-span-2 text-center py-12">
-                        <div className="text-6xl mb-4">📈</div>
-                        <p className="text-gray-500 text-lg">
-                          Nenhuma despesa registrada ainda
-                        </p>
-                        <p className="text-gray-400">
-                          Adicione sua primeira despesa para começar
-                        </p>
-                      </div>
-                    )}
-                  </div>
+            {/* Botões de Ação */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
+              <button
+                onClick={() => setShowAddExpenseModal(true)}
+                className="btn btn-primary flex-1 sm:flex-none sm:w-auto justify-center"
+              >
+                <span>Adicionar Despesa</span>
+              </button>
+              <button
+                onClick={() => setShowAddIncomeModal(true)}
+                className="btn btn-renda flex-1 sm:flex-none sm:w-auto justify-center"
+              >
+                <span>Adicionar Renda</span>
+              </button>
+            </div>
+
+            {/* Categorias */}
+            <div className="mb-8">
+              <div className="card p-6">
+                <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                  <span className="mr-3">📊</span>
+                  Despesas por Categoria
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {expenses.length > 0 ? (
+                    expenses.map((expense, index) => (
+                      <ExpenseCategoryItem key={index} expense={expense} />
+                    ))
+                  ) : (
+                    <div className="col-span-full text-center py-12">
+                      <div className="text-6xl mb-4">📈</div>
+                      <p className="text-gray-500 text-lg">
+                        Nenhuma despesa registrada ainda
+                      </p>
+                      <p className="text-gray-400">
+                        Adicione sua primeira despesa para começar
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
 
             {/* Gráfico Section */}
             {expenses.length > 0 && (
-              <div className="card p-8 mb-8 animate-slide-up" id="stats">
-                <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+              <div className="card p-6 mb-8 animate-slide-up" id="stats">
+                <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
                   📈 Análise Visual das Despesas
                 </h3>
-                <div className="max-w-2xl mx-auto">
+                <div className="max-w-lg mx-auto">
                   <Doughnut
                     data={{
                       labels: expenses.map((expense) => expense.title),
@@ -156,8 +169,8 @@ export default function Home() {
                           data: expenses.map((expense) => expense.total),
                           backgroundColor: expenses.map((expense) => expense.color),
                           borderColor: "#ffffff",
-                          borderWidth: 3,
-                          hoverBorderWidth: 5,
+                          borderWidth: 2,
+                          hoverBorderWidth: 3,
                         },
                       ],
                     }}
@@ -169,11 +182,11 @@ export default function Home() {
                           display: true,
                           position: "bottom",
                           labels: {
-                            padding: 20,
+                            padding: 15,
                             usePointStyle: true,
                             pointStyle: "circle",
                             font: {
-                              size: 14,
+                              size: 12,
                               weight: "500",
                             },
                             color: "#374151",
@@ -185,7 +198,7 @@ export default function Home() {
                           bodyColor: "#fff",
                           borderColor: "#667eea",
                           borderWidth: 1,
-                          cornerRadius: 8,
+                          cornerRadius: 6,
                         },
                       },
                       animations: {
@@ -193,29 +206,12 @@ export default function Home() {
                         animateScale: true,
                       },
                     }}
-                    style={{ width: "100%", height: "400px" }}
+                    style={{ width: "100%", height: "300px" }}
                   />
                 </div>
               </div>
             )}
 
-            {/* Resumo Section */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="card p-6 text-center">
-                <div className="text-3xl mb-2">💸</div>
-                <h3 className="text-xl font-semibold text-gray-700 mb-2">Total de Despesas</h3>
-                <p className="text-3xl font-bold text-red-600">
-                  {currencyFormatter(totalExpenses)}
-                </p>
-              </div>
-              <div className="card p-6 text-center">
-                <div className="text-3xl mb-2">📊</div>
-                <h3 className="text-xl font-semibold text-gray-700 mb-2">Categorias Ativas</h3>
-                <p className="text-3xl font-bold text-blue-600">
-                  {expenses.length}
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

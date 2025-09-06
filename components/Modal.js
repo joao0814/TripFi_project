@@ -2,8 +2,17 @@ import React from "react";
 
 // Componente de modal reutilizável para exibir conteúdo
 function Modal({ show, onClose, children }) {
+  const [isClient, setIsClient] = React.useState(false);
+
+  // Garante que o componente só renderize no cliente
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   // Adicionar/remover classe do body quando modal abrir/fechar
   React.useEffect(() => {
+    if (!isClient) return;
+    
     if (show) {
       document.body.classList.add('modal-open');
     } else {
@@ -14,9 +23,9 @@ function Modal({ show, onClose, children }) {
     return () => {
       document.body.classList.remove('modal-open');
     };
-  }, [show]);
+  }, [show, isClient]);
 
-  if (!show) return null;
+  if (!isClient || !show) return null;
 
   return (
     <div
