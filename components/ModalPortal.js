@@ -16,7 +16,7 @@ function ModalPortal({ children, show }) {
   }
 
   return createPortal(
-    <div style={{ zIndex: 9999, position: 'relative' }}>
+    <div className="z-[9999] relative">
       {children}
     </div>,
     document.body

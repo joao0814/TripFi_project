@@ -50,14 +50,14 @@ function ViewExpenseModal({ show, onClose, expense }) {
     <Modal show={show} onClose={onClose}>
       {/* Header do Modal */}
       <div className="text-center mb-8">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg" style={{ backgroundColor: expense.color }}>
+        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg dynamic-bg" style={{ backgroundColor: expense.color }}>
           <span className="text-2xl font-bold text-white">
             {expense.title.charAt(0).toUpperCase()}
           </span>
         </div>
         <h2 className="text-3xl font-bold text-gray-800 mb-2">{expense.title}</h2>
         <p className="text-lg text-gray-600">
-          Total: <span className="font-bold text-2xl" style={{ color: expense.color }}>
+          Total: <span className="font-bold text-2xl dynamic-color" style={{ color: expense.color }}>
             {currencyFormatter(expense.total)}
           </span>
         </p>

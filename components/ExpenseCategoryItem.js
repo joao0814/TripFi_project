@@ -26,13 +26,13 @@ function ExpenseCategoryItem({ expense }) {
               {/* Círculo colorido representando a categoria */}
               <div className="relative flex-shrink-0">
                 <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-md leading-none"
+                  className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-md leading-none dynamic-bg"
                   style={{ backgroundColor: expense.color }}
                 >
                   {expense.title.charAt(0).toUpperCase()}
                 </div>
                 <div 
-                  className="absolute -top-1 -right-1 w-3 h-3 rounded-full border-2 border-white"
+                  className="absolute -top-1 -right-1 w-3 h-3 rounded-full border-2 border-white dynamic-bg"
                   style={{ backgroundColor: expense.color }}
                 ></div>
               </div>
@@ -55,11 +55,8 @@ function ExpenseCategoryItem({ expense }) {
               </p>
               <div className="w-12 h-1 bg-gray-200 rounded-full mt-1">
                 <div 
-                  className="h-full rounded-full transition-all duration-500"
-                  style={{ 
-                    backgroundColor: expense.color,
-                    width: '100%'
-                  }}
+                  className="h-full rounded-full transition-all duration-500 w-full dynamic-bg"
+                  style={{ backgroundColor: expense.color }}
                 ></div>
               </div>
             </div>

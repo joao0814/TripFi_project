@@ -186,7 +186,7 @@ function AddExpensesModal({ show, onClose }) {
                   >
                     <div className="flex items-center gap-3">
                       <div
-                        className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold shadow-lg"
+                        className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold shadow-lg dynamic-bg"
                         style={{ backgroundColor: expense.color }}
                       >
                         {expense.title.charAt(0).toUpperCase()}

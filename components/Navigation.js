@@ -33,10 +33,7 @@ function Nav() {
                 width={120}
                 height={36}
                 alt="TripFi Logo"
-                className="h-9 w-auto"
-                style={{
-                  filter: 'brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%)'
-                }}
+                className="h-9 w-auto brightness-0 saturate-100 invert-0 sepia-0 saturate-0 hue-rotate-0 brightness-0 contrast-100"
               />
             </div>
           )}

@@ -206,7 +206,7 @@ export default function Home() {
                         animateScale: true,
                       },
                     }}
-                    style={{ width: "100%", height: "300px" }}
+                    className="w-full h-[300px]"
                   />
                 </div>
               </div>

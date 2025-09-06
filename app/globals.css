@@ -310,4 +310,13 @@
   .modal-content .btn-danger:hover {
     @apply z-[25];
   }
+
+  /* Classes para cores dinâmicas - serão aplicadas via JavaScript */
+  .dynamic-bg {
+    /* Esta classe será usada com style inline para cores dinâmicas */
+  }
+
+  .dynamic-color {
+    /* Esta classe será usada com style inline para cores dinâmicas */
+  }
 }
